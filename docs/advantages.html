@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerchEye SDK - Benefits</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <style>
+        :root {
+            --dark-blue: #0B5091;
+            --medium-blue: #1976D2;
+            --bright-blue: #29B6F6;
+            --light-blue: #81D4FA;
+            --pale-blue: #E3F2FD;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--pale-blue);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--dark-blue);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-blue);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--medium-blue);
+            margin-top: 2rem;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .benefits-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            min-height: 450px;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .benefit-header {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        
+        .benefit-content {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .benefit-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefit-description {
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .benefit-footnote {
+            background-color: rgba(0,0,0,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .offline-header {
+            background: linear-gradient(135deg, var(--bright-blue), var(--dark-blue));
+        }
+        
+        .multiplatform-header {
+            background: linear-gradient(135deg, var(--light-blue), var(--medium-blue));
+        }
+        
+        .performance-header {
+            background: linear-gradient(135deg, var(--medium-blue), var(--dark-blue));
+        }
+        
+        .integration-header {
+            background: linear-gradient(135deg, var(--bright-blue), var(--medium-blue));
+        }
+        
+        .footer {
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--medium-blue), var(--dark-blue));
+            padding: 3rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 4rem;
+            color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .cta-section h2 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--medium-blue);
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 1rem;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: var(--pale-blue);
+        }
+        
+        .btn-alt {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-alt:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .highlight {
+            font-weight: bold;
+            color: var(--medium-blue);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            color: white;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .benefits-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefit-card {
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="PerchEye Logo" width="40" height="40" />
+            <span class="logo-text">PerchEye SDK</span>
+        </div>      
+        <div class="nav-links">
+            <a href="https://vladimironix.github.io/PerchEye-SDK">Home</a>
+            <a href="https://vladimironix.github.io/PerchEye-SDK/how-to-use">How to Use</a>
+            <a href="">Advantages</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/blob/main/README.md">Documentation</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/tree/main/android-aar">Download</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <h1>Why Choose PerchEye SDK</h1>
+            <p>PerchEye delivers cutting-edge facial recognition technology designed specifically for mobile developers. Discover why leading apps choose our solution for their face detection and verification needs.</p>
+        </div>
+        
+        <div class="benefits-container">
+            <div class="benefit-card">
+                <div class="benefit-header offline-header">Works Completely Offline</div>
+                <div class="benefit-content">
+                    <div class="benefit-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <!-- Disconnected WiFi symbol -->
+                            <circle cx="40" cy="40" r="35" fill="#E3F2FD" />
+                            <path d="M20,40 C20,40 30,30 40,30 C50,30 60,40 60,40" stroke="#1976D2" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <path d="M25,45 C25,45 32.5,37.5 40,37.5 C47.5,37.5 55,45 55,45" stroke="#1976D2" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            <path d="M30,50 C30,50 35,45 40,45 C45,45 50,50 50,50" stroke="#1976D2" stroke-width="3" fill="none" stroke-linecap="round"/>
+                            
+                            <!-- No connection slash -->
+                            <line x1="60" y1="20" x2="20" y2="60" stroke="#0B5091" stroke-width="3" stroke-linecap="round"/>
+                            
+                            <!-- Mobile device -->
+                            <rect x="35" y="52" width="10" height="18" rx="1" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            <circle cx="40" cy="65" r="2" fill="#E3F2FD"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-description">
+                        <h2>No Internet Connection Required</h2>
+                        <p>PerchEye SDK operates completely offline, processing all facial recognition tasks directly on the device without sending any data to external servers.</p>
+                        <p>This means your app can:</p>
+                        <ul>
+                            <li>Function perfectly in areas with poor or no connectivity</li>
+                            <li>Offer faster response times without network latency</li>
+                            <li>Provide enhanced user privacy and data security</li>
+                            <li>Reduce battery consumption by eliminating network operations</li>
+                        </ul>
+                    </div>
+                    <div class="benefit-footnote">
+                        All biometric data stays on the user's device, complying with modern privacy regulations and building user trust.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-header multiplatform-header">Multiplatform Solution</div>
+                <div class="benefit-content">
+                    <div class="benefit-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <!-- Platforms circle -->
+                            <circle cx="40" cy="40" r="35" fill="#E3F2FD" />
+                            
+                            <!-- Phone -->
+                            <rect x="20" y="25" width="15" height="30" rx="2" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            <rect x="23" y="30" width="9" height="15" fill="#E3F2FD"/>
+                            <circle cx="27.5" cy="50" r="1.5" fill="#E3F2FD"/>
+                            
+                            <!-- Tablet -->
+                            <rect x="45" y="20" width="20" height="30" rx="2" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            <rect x="47" y="25" width="16" height="15" fill="#E3F2FD"/>
+                            <circle cx="55" cy="45" r="1.5" fill="#E3F2FD"/>
+                            
+                            <!-- Wearable -->
+                            <rect x="33" y="43" width="14" height="17" rx="4" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            <rect x="36" y="47" width="8" height="8" rx="1" fill="#E3F2FD"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-description">
+                        <h2>Support for All Platforms</h2>
+                        <p>PerchEye SDK is designed to work seamlessly across all Android platforms and form factors, ensuring consistent performance regardless of the device.</p>
+                        <p>Our SDK supports:</p>
+                        <ul>
+                            <li>Android smartphones and tablets of all screen sizes</li>
+                            <li>Android-powered wearable devices</li>
+                            <li>Smart displays and Android TV applications</li>
+                            <li>Industrial and enterprise Android devices</li>
+                        </ul>
+                    </div>
+                    <div class="benefit-footnote">
+                        One SDK, multiple platforms - simplify your development and maintenance while reaching users on all their devices.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-header performance-header">High Performance</div>
+                <div class="benefit-content">
+                    <div class="benefit-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <!-- Performance circle -->
+                            <circle cx="40" cy="40" r="35" fill="#E3F2FD" />
+                            
+                            <!-- CPU Chip -->
+                            <rect x="25" y="25" width="30" height="30" rx="2" fill="#29B6F6" stroke="#0B5091" stroke-width="1.5"/>
+                            
+                            <!-- CPU Grid -->
+                            <rect x="30" y="30" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="38" y="30" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="46" y="30" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="30" y="38" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="38" y="38" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="46" y="38" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="30" y="46" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="38" y="46" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                            <rect x="46" y="46" width="5" height="5" rx="1" fill="#E3F2FD"/>
+                        
+                            
+                            <!-- Lightning Bolt -->
+                            <path d="M58,40 L50,50 L55,51 L45,65 L48,56 L43,55 L53,37" fill="#1976D2" stroke="#0B5091" stroke-width="1"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-description">
+                        <h2>Lightning-Fast Results</h2>
+                        <p>PerchEye SDK is optimized for speed and efficiency, utilizing multiple CPU cores to deliver near-instantaneous results even on mid-range devices.</p>
+                        <p>Performance advantages include:</p>
+                        <ul>
+                            <li>Multi-threaded processing for parallel face detection and analysis</li>
+                            <li>Optimized TensorFlow Lite models for mobile processors</li>
+                            <li>Memory-efficient operations that minimize battery impact</li>
+                            <li>Response times measured in milliseconds, not seconds</li>
+                        </ul>
+                    </div>
+                    <div class="benefit-footnote">
+                        Users expect instant results - with PerchEye, you'll deliver face detection so fast they won't even notice the processing time.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="benefit-card">
+                <div class="benefit-header integration-header">Easy to Integrate</div>
+                <div class="benefit-content">
+                    <div class="benefit-icon">
+                        <svg width="80" height="80" viewBox="0 0 80 80">
+                            <!-- Integration circle -->
+                            <circle cx="40" cy="40" r="35" fill="#E3F2FD" />
+                            
+                            <!-- Code blocks -->
+                            <rect x="15" y="30" width="50" height="8" rx="2" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            <rect x="15" y="42" width="35" height="8" rx="2" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            <rect x="15" y="54" width="45" height="8" rx="2" fill="#29B6F6" stroke="#0B5091" stroke-width="1"/>
+                            
+                            <!-- Code lines -->
+                            <rect x="20" y="32" width="25" height="2" rx="1" fill="#E3F2FD"/>
+                            <rect x="50" y="32" width="10" height="2" rx="1" fill="#E3F2FD"/>
+                            <rect x="20" y="44" width="15" height="2" rx="1" fill="#E3F2FD"/>
+                            <rect x="40" y="44" width="5" height="2" rx="1" fill="#E3F2FD"/>
+                            <rect x="20" y="56" width="30" height="2" rx="1" fill="#E3F2FD"/>
+                            <rect x="55" y="56" width="5" height="2" rx="1" fill="#E3F2FD"/>
+                            
+                            <!-- Integration arrows -->
+                            <path d="M35,18 L40,25 L45,18" stroke="#0B5091" stroke-width="2" stroke-linecap="round" fill="none"/>
+                            <line x1="40" y1="15" x2="40" y2="26" stroke="#0B5091" stroke-width="2" stroke-linecap="round"/>
+                            
+                            <!-- Checkmark -->
+                            <circle cx="60" cy="45" r="8" fill="#1976D2" stroke="#0B5091" stroke-width="1"/>
+                            <path d="M55,45 L59,49 L65,43" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="benefit-description">
+                        <h2>Simple Implementation</h2>
+                        <p>We've designed PerchEye SDK to be implemented with minimal effort, allowing developers to add sophisticated facial recognition with just a few lines of code.</p>
+                        <p>Integration benefits:</p>
+                        <ul>
+                            <li>Clear, concise API with intuitive method names</li>
+                            <li>Comprehensive documentation with examples</li>
+                            <li>Minimal dependencies to avoid bloating your app</li>
+                            <li>Simple Gradle implementation with Maven repository support</li>
+                        </ul>
+                    </div>
+                    <div class="benefit-footnote">
+                        Get up and running in minutes, not days. Our SDK is designed by developers, for developers, with a focus on simplicity.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Ready to Add Powerful Face Recognition to Your App?</h2>
+            <p>Join the thousands of developers already using PerchEye SDK to create more secure, personalized, and innovative applications.</p>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/tree/main/android-aar" class="btn">Download SDK</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/blob/main/README.md" class="btn btn-alt">View Documentation</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 PerchEye SDK. All rights reserved.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "name": "react-native-perch-eye",
+  "version": "0.0.1",
+  "description": "High-performance React Native SDK for face recognition and verification using native TensorFlow and C++ engine. Extract and compare unique face hashes from images with zero dependencies.",
+  "main": "src/index.tsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "rm -rf android/build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladimirOnix/PerchEye-SDK"
+  },
+  "keywords": [
+    "react-native",
+    "face-recognition",
+    "face-verification",
+    "tensorflow",
+    "native-module",
+    "biometrics",
+    "face-hash",
+    "mobile-sdk"
+  ],
+  "author": "Ruslan Horbachevskyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VladimirOnix/PerchEye-SDK/issues"
+  },
+  "homepage": "https://github.com/VladimirOnix/PerchEye-SDK/tree/main/react-native#readme",
+  "peerDependencies": {
+    "react-native": ">=0.40.0"
+  }
+}

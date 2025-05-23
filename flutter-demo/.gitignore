@@ -1,0 +1,118 @@
+# ----------------------
+# Flutter/Dart/Pub
+# ----------------------
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.melos_tool/
+
+# Symbolication / Obfuscation
+app.*.symbols
+app.*.map.json
+
+# ----------------------
+# iOS
+# ----------------------
+ios/Flutter/.last_build_id
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/ephemeral/
+ios/build/
+ios/Runner.xcworkspace/
+ios/DerivedData/
+*.xcuserstate
+*.xcworkspace
+*.xcassets
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+*.xcuserdatad/
+
+# ----------------------
+# macOS
+# ----------------------
+macos/Pods/
+macos/.symlinks/
+macos/build/
+macos/Flutter/ephemeral/
+macos/DerivedData/
+
+# ----------------------
+# Android
+# ----------------------
+android/.gradle/
+android/.idea/
+android/local.properties
+android/.settings/
+android/build/
+android/captures/
+
+# Android Studio specific folders
+android/app/debug/
+android/app/profile/
+android/app/release/
+
+# ----------------------
+# Windows
+# ----------------------
+windows/build/
+windows/runner/Debug/
+windows/runner/Release/
+windows/flutter/ephemeral/
+
+# ----------------------
+# Linux
+# ----------------------
+linux/build/
+linux/flutter/ephemeral/
+
+# ----------------------
+# Web
+# ----------------------
+web/.dart_tool/
+web/build/
+
+# ----------------------
+# Editor & OS specific
+# ----------------------
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+*.lock
+*.bak
+*.tmp
+
+# JetBrains (IntelliJ, Android Studio)
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# VS Code
+.vscode/
+
+# Others
+.atom/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# ----------------------
+# Native artifacts / Binaries
+# ----------------------
+*.so
+*.dll
+*.dylib
+*.exe
+*.apk
+*.ipa
+*.aar
+
+# Custom AAR if not needed in VCS
+**/perch-eye-*.aar

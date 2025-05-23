@@ -1,0 +1,14 @@
+name: flutter_demo
+description: Demo app for PerchEye SDK
+version: 1.0.0
+
+environment:
+  sdk: '>=2.17.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  perch_eye:
+    path: ../flutter
+  image_picker: ^0.8.5+3
+  image: ^3.2.2

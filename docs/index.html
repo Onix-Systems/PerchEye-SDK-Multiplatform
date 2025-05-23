@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerchEye SDK - Integration Examples</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <style>
+        :root {
+            --dark-blue: #0B5091;
+            --medium-blue: #1976D2;
+            --bright-blue: #29B6F6;
+            --light-blue: #81D4FA;
+            --pale-blue: #E3F2FD;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--pale-blue);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--dark-blue);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-blue);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--medium-blue);
+            margin-top: 2.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-blue);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--dark-blue);
+            margin-top: 2rem;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-left: 4px solid var(--bright-blue);
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .code-comment {
+            color: #009688;
+            font-style: italic;
+        }
+        
+        .code-keyword {
+            color: #3949AB;
+            font-weight: bold;
+        }
+        
+        .code-string {
+            color: #D81B60;
+        }
+        
+        .tab-container {
+            margin: 2rem 0;
+        }
+        
+        .tab-buttons {
+            display: flex;
+            overflow-x: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .tab-button {
+            padding: 0.8rem 1.2rem;
+            background-color: #f1f1f1;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+            margin-right: 0.2rem;
+        }
+        
+        .tab-button.active {
+            background-color: var(--bright-blue);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .note {
+            background-color: rgba(41, 182, 246, 0.1);
+            border-left: 4px solid var(--bright-blue);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .warning {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #FF9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .tip {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .use-case {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .use-case h3 {
+            color: var(--medium-blue);
+            margin-top: 0;
+        }
+        
+        .use-case-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .use-case-icon {
+            margin-right: 1rem;
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--pale-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background-color: white;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--pale-blue);
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .footer {
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .method-table {
+            width: 100%;
+            margin: 1.5rem 0;
+        }
+        
+        .method-name {
+            color: var(--medium-blue);
+            font-weight: bold;
+            font-family: monospace;
+        }
+        
+        .toc {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .toc-title {
+            font-size: 1.3rem;
+            color: var(--dark-blue);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .toc-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .toc-list a {
+            color: var(--medium-blue);
+            text-decoration: none;
+        }
+        
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .toc-section {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        
+        .toc-subsection {
+            padding-left: 1.5rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            color: white;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .code-block {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="PerchEye Logo" width="40" height="40" />
+            <span class="logo-text">PerchEye SDK</span>
+        </div>        
+        <div class="nav-links">
+            <a href="">Home</a>
+            <a href="https://vladimironix.github.io/PerchEye-SDK/how-to-use">How to Use</a>
+            <a href="https://vladimironix.github.io/PerchEye-SDK/advantages.html">Advantages</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/blob/main/README.md">Documentation</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/tree/main/android-aar">Download</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <h1>PerchEye SDK Integration Examples</h1>
+            <p>This page provides comprehensive examples of how to integrate and use the PerchEye SDK in your Android applications. Each code sample is designed to be clear, concise, and ready to use in your own projects.</p>
+        </div>
+        
+        <div class="toc">
+            <h3 class="toc-title">Table of Contents</h3>
+            <ul class="toc-list">
+                <li><a href="#getting-started">1. Getting Started</a></li>
+                <li><a href="#basic-integration">2. Basic Integration</a></li>
+                <li><a href="#face-detection">3. Face Detection</a></li>
+                <li><a href="#face-enrollment">4. Face Enrollment</a></li>
+                <li><a href="#face-verification">5. Face Verification</a></li>
+                <li><a href="#multiple-faces">6. Working with Multiple Faces</a></li>
+                <li><a href="#lightweight-methods">7. Working with Lightweight Methods</a></li>
+                <li><a href="#use-cases">8. Common Use Cases</a>
+                    <ul class="toc-subsection">
+                        <li><a href="#authentication">8.1 User Authentication</a></li>
+                        <li><a href="#attendance">8.2 Attendance Systems</a></li>
+                        <li><a href="#access-control">8.3 Access Control</a></li>
+                        <li><a href="#photo-sorting">8.4 Photo Sorting/Organization</a></li>
+                    </ul>
+                </li>
+                <li><a href="#best-practices">9. Best Practices</a></li>
+                <li><a href="#troubleshooting">10. Troubleshooting</a></li>
+            </ul>
+        </div>
+        
+        <h2 id="getting-started">1. Getting Started</h2>
+        <p>Before you can start using PerchEye SDK, you need to add it as a dependency in your Android project and perform the initial setup.</p>
+        
+        <h3>Add Dependencies</h3>
+        <div class="code-block">
+            <pre><span class="code-comment">// Add the repository to your project's build.gradle</span>
+repositories {
+    maven { url '<span class="code-string">https://maven.percheye.com/releases</span>' }
+}
+
+<span class="code-comment">// Add the dependency to your app's build.gradle</span>
+dependencies {
+    implementation '<span class="code-string">com.percheye.android:sdk:1.2.3</span>'
+}</pre>
+        </div>
+        
+        <h3>Initialize the SDK</h3>
+        <p>The PerchEye SDK must be initialized before use, typically in your Application class or in the onCreate method of your main activity.</p>
+        
+        <div class="code-block">
+            <pre><span class="code-keyword">import</span> com.percheye.android.PerchEye
+<span class="code-keyword">import</span> android.os.Bundle
+<span class="code-keyword">import</span> androidx.appcompat.app.AppCompatActivity
+
+<span class="code-keyword">class</span> MainActivity : AppCompatActivity() {
+    
+    <span class="code-keyword">private</span> <span class="code-keyword">lateinit var</span> perchEye: PerchEye
+    
+    <span class="code-keyword">override fun</span> onCreate(savedInstanceState: Bundle?) {
+        <span class="code-keyword">super</span>.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        
+        <span class="code-comment">// Initialize the SDK</span>
+        perchEye = PerchEye(context)
+        perchEye.init()
+    }
+    
+    <span class="code-keyword">override fun</span> onDestroy() {
+        <span class="code-keyword">super</span>.onDestroy()
+        
+        <span class="code-comment">// Always destroy the SDK when done to free resources</span>
+        perchEye.destroy()
+    }
+}</pre>
+        </div>
+        
+        <div class="note">
+            <strong>Note:</strong> Always call <code>destroy()</code> when you're done using the SDK to free up resources properly. Failure to do so may lead to memory leaks.
+        </div>
+        
+        <h2 id="basic-integration">2. Basic Integration</h2>
+        <p>Let's start with a simple integration example that shows how to detect a face in an image and perform basic operations.</p>
+        
+        <div class="code-block">
+            <pre><span class="code-keyword">import</span> com.percheye.android.PerchEye
+<span class="code-keyword">import</span> com.percheye.android.ImageResult
+<span class="code-keyword">import</span> android.graphics.Bitmap
+
+<span class="code-keyword">class</span> FaceProcessor {
+    
+    <span class="code-keyword">private</span> <span class="code-keyword">val</span> perchEye = PerchEye(context)
+    
+    <span class="code-keyword">init</span> {
+        perchEye.init()
+    }
+    
+    <span class="code-keyword">fun</span> processFaceImage(bitmap: Bitmap): Boolean {
+        <span class="code-comment">// Open a transaction for processing</span>
+        perchEye.openTransaction()
+        
+        <span class="code-comment">// Add the image for processing</span>
+        <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+        
+        <span class="code-comment">// Check if face was detected successfully</span>
+        <span class="code-keyword">return</span> result == ImageResult.SUCCESS
+    }
+    
+    <span class="code-keyword">fun</span> cleanup() {
+        perchEye.destroy()
+    }
+}</pre>
+        </div>
+        
+        <h2 id="face-detection">3. Face Detection</h2>
+        <p>Face detection is the process of identifying human faces in digital images. This is the first step in any facial recognition workflow.</p>
+        
+        <h3>Detecting Faces in an Image</h3>
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> detectFace(bitmap: Bitmap): ImageResult {
+    <span class="code-comment">// Always start by opening a transaction</span>
+    perchEye.openTransaction()
+    
+    <span class="code-comment">// Attempt to add and detect a face in the image</span>
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+    
+    <span class="code-comment">// Log the result for debugging purposes</span>
+    <span class="code-keyword">when</span> (result) {
+        ImageResult.SUCCESS -> Log.d("PerchEye", "Face detected successfully")
+        ImageResult.FACE_NOT_FOUND -> Log.d("PerchEye", "No face found in the image")
+        ImageResult.FILE_NOT_FOUND -> Log.d("PerchEye", "Image file not found")
+        ImageResult.TRANSACTION_NOT_OPEN -> Log.d("PerchEye", "Transaction not open")
+        ImageResult.SDK_NOT_INITIALIZED -> Log.d("PerchEye", "SDK not initialized")
+        ImageResult.INTERNAL_ERROR -> Log.d("PerchEye", "Internal error occurred")
+    }
+    
+    <span class="code-keyword">return</span> result
+}</pre>
+        </div>
+        
+        <h3>Processing Image from Camera</h3>
+        <p>Here's how to process an image directly from the device's camera:</p>
+        
+        <div class="code-block">
+            <pre><span class="code-keyword">private</span> <span class="code-keyword">val</span> cameraLauncher = registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+    bitmap?.let {
+        processImageFromCamera(it)
+    }
+}
+
+<span class="code-keyword">private fun</span> processImageFromCamera(bitmap: Bitmap) {
+    <span class="code-comment">// Open a transaction</span>
+    perchEye.openTransaction()
+    
+    <span class="code-comment">// Process the image</span>
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+    
+    <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+        <span class="code-comment">// Face detected, proceed with your application logic</span>
+        showMessage("Face detected successfully")
+    } <span class="code-keyword">else</span> {
+        <span class="code-comment">// No face found or other error</span>
+        showMessage("Face detection failed: $result")
+    }
+}
+
+<span class="code-keyword">private fun</span> captureImage() {
+    cameraLauncher.launch(null)
+}</pre>
+        </div>
+        
+        <h3>Processing Raw Pixel Data</h3>
+        <p>For more advanced use cases, you can process raw pixel data:</p>
+        
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> processRawPixelData(pixels: ByteArray, width: Int, height: Int): ImageResult {
+    perchEye.openTransaction()
+    
+    <span class="code-comment">// Process raw RGBA pixel data</span>
+    <span class="code-keyword">return</span> perchEye.addImage(pixels, width, height)
+}</pre>
+        </div>
+        
+        <h2 id="face-enrollment">4. Face Enrollment</h2>
+        <p>Face enrollment is the process of registering a face for future verification. This typically involves generating a unique hash that represents the face's biometric data.</p>
+        
+        <h3>Enrolling a Single Face</h3>
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> enrollFace(bitmap: Bitmap): String? {
+    perchEye.openTransaction()
+    
+    <span class="code-comment">// Add the face image</span>
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+    
+    <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+        <span class="code-comment">// Generate a hash for this face</span>
+        <span class="code-keyword">val</span> hash = perchEye.enroll()
+        
+        <span class="code-comment">// Store this hash in your database or shared preferences</span>
+        saveUserFaceHash(userId, hash)
+        
+        <span class="code-keyword">return</span> hash
+    }
+    
+    <span class="code-keyword">return null</span>
+}
+
+<span class="code-keyword">private fun</span> saveUserFaceHash(userId: String, hash: String) {
+    <span class="code-comment">// Example of storing the hash in SharedPreferences</span>
+    <span class="code-keyword">val</span> prefs = context.getSharedPreferences("face_data", Context.MODE_PRIVATE)
+    prefs.edit().putString(userId, hash).apply()
+}</pre>
+        </div>
+        
+        <h3>Enrolling Multiple Face Images</h3>
+        <p>For better accuracy, you can enroll multiple images of the same face:</p>
+        
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> enrollMultipleFaceImages(bitmaps: List&lt;Bitmap&gt;): String? {
+    <span class="code-keyword">if</span> (bitmaps.isEmpty()) <span class="code-keyword">return null</span>
+    
+    <span class="code-keyword"></span>perchEye.openTransaction()</span>
+
+    <span class="code-comment">// Upload all bitmaps</span>
+    <span class="code-keyword"></span>bitmaps.forEach(perchEye::addImage)</span>
+
+    <span class="code-comment">// Use the enroll method to process multiple images</span>
+    <span class="code-keyword">val</span> hash = perchEye.enroll()
+    
+    <span class="code-comment">// Store the composite hash</span>
+    <span class="code-keyword">if</span> (hash.isNotEmpty()) {
+        saveUserFaceHash(userId, hash)
+        <span class="code-keyword">return</span> hash
+    }
+    
+    <span class="code-keyword">return null</span>
+}</pre>
+        </div>
+        
+        <div class="tip">
+            <strong>Tip:</strong> Enrolling multiple images of the same face from different angles and lighting conditions can significantly improve verification accuracy.
+        </div>
+        
+        <h2 id="face-verification">5. Face Verification</h2>
+        <p>Face verification is the process of comparing a face against a previously enrolled face to confirm the identity.</p>
+        
+        <h3>Verifying Against a Stored Hash</h3>
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> verifyFace(bitmap: Bitmap, storedHash: String): Float {
+    perchEye.openTransaction()
+    
+    <span class="code-comment">// Add the new face image</span>
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+    
+    <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+        <span class="code-comment">// Verify against the stored hash</span>
+        <span class="code-keyword">val</span> similarity = perchEye.verify(storedHash)
+        
+        <span class="code-comment">// Similarity is a value between 0.0 and 1.0</span>
+        <span class="code-comment">// Higher values indicate better match</span>
+        <span class="code-keyword">return</span> similarity
+    }
+    
+    <span class="code-keyword">return</span> 0.0f
+}
+
+<span class="code-keyword">fun</span> isMatchAcceptable(similarity: Float): Boolean {
+    <span class="code-comment">// Define your threshold for accepting a match</span>
+    <span class="code-comment">// This value depends on your security requirements</span>
+    <span class="code-keyword">val</span> MATCH_THRESHOLD = 0.8f
+    
+    <span class="code-keyword">return</span> similarity >= MATCH_THRESHOLD
+}</pre>
+        </div>
+        
+        <h3>Implementing a Login Flow</h3>
+        <p>Here's an example of using face verification for a login flow:</p>
+        
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> loginWithFace(userId: String, currentFaceImage: Bitmap): Boolean {
+    <span class="code-comment">// Retrieve the stored hash for this user</span>
+    <span class="code-keyword">val</span> storedHash = getUserFaceHash(userId)
+    
+    <span class="code-keyword">if</span> (storedHash != null) {
+        <span class="code-comment">// Verify the current face against the stored hash</span>
+        <span class="code-keyword">val</span> similarity = verifyFace(currentFaceImage, storedHash)
+        
+        <span class="code-comment">// Check if the similarity is above our threshold</span>
+        <span class="code-keyword">if</span> (isMatchAcceptable(similarity)) {
+            <span class="code-comment">// Authentication successful</span>
+            <span class="code-keyword">return true</span>
+        }
+    }
+    
+    <span class="code-comment">// Authentication failed</span>
+    <span class="code-keyword">return false</span>
+}
+
+<span class="code-keyword">private fun</span> getUserFaceHash(userId: String): String? {
+    <span class="code-comment">// Example of retrieving from SharedPreferences</span>
+    <span class="code-keyword">val</span> prefs = context.getSharedPreferences("face_data", Context.MODE_PRIVATE)
+    <span class="code-keyword">return</span> prefs.getString(userId, null)
+}</pre>
+        </div>
+        
+        <h2 id="multiple-faces">6. Working with Multiple Faces</h2>
+        <p>In some scenarios, you might need to work with multiple faces or compare faces across different images.</p>
+        
+        <h3>Comparing Two Faces</h3>
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> compareTwoFaces(face1: Bitmap, face2: Bitmap): Float {
+    <span class="code-comment">// enroll hash from face1 bitmap</span>
+    perchEye.openTransaction()
+    perchEye.addImage(face1)
+    <span class="code-keyword">val</span> hash = sdk.enroll()
+
+    <span class="code-comment">// compare hash with face2 bitmap</span>
+    perchEye.openTransaction()
+    perchEye.addImage(face2)
+    <span class="code-keyword">return</span> perchEye.verify(hash)
+}</pre>
+        </div>
+        
+        <h2 id="lightweight-methods">7. Working with Lightweight Methods</h2>
+        <p>In addition to the enroll and verify transaction-based approach, there are two lightweight methods that allow for extremely fast hash generation and comparison. These methods accept 160x160-sized bitmaps that should contain faces.</p>
+        
+        <h3>Comparing Two Faces</h3>
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> compareFaces(face1: Bitmap, face2: Bitmap): Float {
+    <span class="code-comment">// generate a hash for the face1</span>
+    <span class="code-keyword">val</span> hash = perchEye.evaluate(listOf(face1))
+    <span class="code-comment">// compare face1 hash with face2</span>
+    <span class="code-keyword">return</span> perchEye.compare(listOf(face2), hash)
+}</pre>
+        </div>
+        
+        <h3>Comparing Multiple Faces For Best Match</h3>
+        <div class="code-block">
+            <pre><span class="code-keyword">fun</span> compareMultipleFaces(faces1: List&lt;Bitmap&gt;, faces2: List&lt;Bitmap&gt;): Float {
+    <span class="code-comment">// generate a hash for the faces1</span>
+    <span class="code-keyword">val</span> hash = perchEye.evaluate(faces1)
+    <span class="code-comment">// compare face1 hash with faces2</span>
+    <span class="code-keyword">return</span> perchEye.compare(faces2, hash)
+}</pre>
+        </div>
+        
+        <div class="note">
+            <strong>Note:</strong> These lightweight methods require 160x160-sized bitmaps containing faces. Make sure to preprocess your images to meet these requirements before using these methods, otherwise you will get an empty hash or zero similarity accordingly
+        </div>
+        
+        <h2 id="use-cases">8. Common Use Cases</h2>
+        <p>Below are several real-world use cases for implementing facial recognition in your applications.</p>
+        
+        <div class="use-case" id="authentication">
+            <div class="use-case-header">
+                <div class="use-case-icon">1</div>
+                <h3>User Authentication</h3>
+            </div>
+            <p>Implement biometric login with face recognition:</p>
+            <div class="code-block">
+                <pre><span class="code-keyword">class</span> FaceAuthenticator {
+    <span class="code-keyword">private val</span> perchEye = PerchEye(context)
+    <span class="code-keyword">private val</span> AUTHENTICATION_THRESHOLD = 0.85f <span class="code-comment">// Higher threshold for security</span>
+    
+    <span class="code-keyword">init</span> {
+        perchEye.init()
+    }
+    
+    <span class="code-keyword">fun</span> registerUser(userId: String, faceBitmap: Bitmap): Boolean {
+        perchEye.openTransaction()
+        
+        <span class="code-keyword">val</span> result = perchEye.addImage(faceBitmap)
+        
+        <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+            <span class="code-keyword">val</span> hash = perchEye.enroll()
+            saveUserHash(userId, hash)
+            <span class="code-keyword">return true</span>
+        }
+        
+        <span class="code-keyword">return false</span>
+    }
+    
+    <span class="code-keyword">fun</span> authenticateUser(userId: String, faceBitmap: Bitmap): Boolean {
+        <span class="code-keyword">val</span> storedHash = getUserHash(userId) ?: <span class="code-keyword">return false</span>
+        
+        perchEye.openTransaction()
+        <span class="code-keyword">val</span> result = perchEye.addImage(faceBitmap)
+        
+        <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+            <span class="code-keyword">val</span> similarity = verifyFace(faceBitmap, storedHash)
+            
+            <span class="code-keyword">return</span> similarity >= AUTHENTICATION_THRESHOLD
+        }
+        
+        <span class="code-keyword">return false</span>
+    }
+}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

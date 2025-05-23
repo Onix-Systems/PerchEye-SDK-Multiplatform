@@ -1,0 +1,19 @@
+name: perch_eye
+description: Flutter plugin for PerchEye SDK
+version: 0.0.1
+homepage: https://github.com/VladimirOnix/PerchEye-SDK/tree/main/flutter
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+environment:
+  sdk: ^3.7.2
+  flutter: '>=3.3.0'
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.percheye.flutter
+        pluginClass: PerchEyePlugin

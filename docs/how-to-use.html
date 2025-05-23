@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerchEye SDK - How to Use</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <style>
+        :root {
+            --dark-blue: #0B5091;
+            --medium-blue: #1976D2;
+            --bright-blue: #29B6F6;
+            --light-blue: #81D4FA;
+            --pale-blue: #E3F2FD;
+            --orange: #FF7043;
+            --yellow: #FFCA28;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--pale-blue);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--dark-blue);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-blue);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--medium-blue);
+            margin-top: 2rem;
+        }
+        
+        .nav-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .intro {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .step-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            min-height: auto;
+            height: auto;
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, var(--medium-blue), var(--dark-blue));
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h3 {
+            margin-top: 0;
+            color: var(--dark-blue);
+            font-size: 1.5rem;
+        }
+        
+        .code-block {
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: monospace;
+            border-left: 4px solid var(--bright-blue);
+        }
+        
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        
+        .illustration-container {
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--bright-blue);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 1rem;
+            margin-top: 1rem;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            background-color: var(--medium-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .footer {
+            background-color: var(--dark-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .next-steps {
+            background: linear-gradient(135deg, var(--medium-blue), var(--dark-blue));
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 3rem;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .next-steps h2 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .step-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <img src="assets/logo.png" alt="PerchEye Logo" width="40" height="40" />
+            <span class="logo-text">PerchEye SDK</span>
+        </div>      
+        <div class="nav-links">
+            <a href="https://vladimironix.github.io/PerchEye-SDK">Home</a>
+            <a href="">How to Use</a>
+            <a href="https://vladimironix.github.io/PerchEye-SDK/advantages.html">Advantages</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/blob/main/README.md">Documentation</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/tree/main/android-aar">Download</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="intro">
+            <h1>How to Use PerchEye SDK</h1>
+            <p>Adding facial recognition to your Android app is simple with PerchEye SDK. Follow these three easy steps to get started.</p>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Add the SDK to Your Project</h3>
+                    <p>Start by adding the PerchEye SDK to your Android project. Simply add the following to your app's build.gradle file:</p>
+                    
+                    <div class="code-block">
+                        <pre>// Add the repository
+repositories {
+    maven { url 'https://maven.percheye.com/releases' }
+}
+
+// Add the dependency
+dependencies {
+    implementation 'com.percheye.android:sdk:1.2.3'
+}</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Register Face for Future Verification</h3>
+                    <p>Use the SDK to scan a face and generate a unique identity hash. This hash can be stored in your app's database or preferences instead of the actual face image, providing better security and privacy.</p>
+                    
+                    <div class="illustration-container">
+                        <svg width="300" height="180" viewBox="0 0 300 180">
+                            <!-- Face Image Representation -->
+                            <rect x="20" y="40" width="80" height="100" rx="10" fill="#E3F2FD" stroke="#0B5091" stroke-width="2"/>
+                            
+                            <!-- Face illustration -->
+                            <circle cx="60" cy="90" r="30" fill="#FFCC80" stroke="#E65100" stroke-width="1"/>
+                            <circle cx="50" cy="80" r="4" fill="#5D4037"/>
+                            <circle cx="70" cy="80" r="4" fill="#5D4037"/>
+                            <path d="M50,100 C55,105 65,105 70,100" fill="none" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+                            
+                            <!-- Processing Arrow -->
+                            <path d="M120,90 L150,90" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                            <polygon points="150,85 160,90 150,95" fill="#333"/>
+                            
+                            <!-- SDK Processing -->
+                            <rect x="170" y="50" width="60" height="80" rx="10" fill="#29B6F6" stroke="#0B5091" stroke-width="2"/>
+                            <text x="200" y="95" text-anchor="middle" fill="white" font-weight="bold" font-size="12">PerchEye</text>
+                            <text x="200" y="110" text-anchor="middle" fill="white" font-size="10">SDK</text>
+                            
+                            <!-- Labels -->
+                            <text x="60" y="30" text-anchor="middle" font-size="12" fill="#0B5091" font-weight="bold">FACE IMAGE</text>
+                            <text x="200" y="30" text-anchor="middle" font-size="12" fill="#0B5091" font-weight="bold">GENERATE HASH</text>
+                            <text x="60" y="160" text-anchor="middle" font-size="12" fill="#0B5091">Initial Enrollment</text>
+                            <text x="200" y="160" text-anchor="middle" font-size="12" fill="#0B5091">Secure Identity Data</text>
+                        </svg>
+                    </div>
+                    
+                    <p>The SDK stores a mathematical representation of facial features, not the actual image, ensuring privacy and data security.</p>
+                </div>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Verify New Photos Against Stored Data</h3>
+                    <p>When a user wants to be verified, the SDK will compare their current face image against the previously stored hash and return a similarity score, making authentication simple and secure.</p>
+                    
+                    <div class="illustration-container">
+                        <svg width="300" height="180" viewBox="0 0 300 180">
+                            <!-- New Image -->
+                            <rect x="20" y="30" width="70" height="90" rx="10" fill="#E3F2FD" stroke="#0B5091" stroke-width="2"/>
+                            <circle cx="55" cy="75" r="25" fill="#FFCC80" stroke="#E65100" stroke-width="1"/>
+                            <circle cx="45" cy="65" r="4" fill="#5D4037"/>
+                            <circle cx="65" cy="65" r="4" fill="#5D4037"/>
+                            <path d="M45,85 C50,90 60,90 65,85" fill="none" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+                            <text x="55" y="20" text-anchor="middle" font-size="10" fill="#0B5091" font-weight="bold">NEW PHOTO</text>
+                            
+                            <!-- Database -->
+                            <rect x="20" y="140" width="70" height="30" rx="5" fill="white" stroke="#0B5091" stroke-width="2"/>
+                            <text x="55" y="160" text-anchor="middle" font-size="9" fill="#0B5091" font-weight="bold">STORED HASH</text>
+                            
+                            <!-- Arrows to comparison -->
+                            <path d="M100,75 L130,95" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                            <polygon points="130,90 140,95 130,100" fill="#333"/>
+                            
+                            <path d="M100,155 L130,130" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                            <polygon points="130,135 140,130 130,125" fill="#333"/>
+                            
+                            <!-- SDK Comparison -->
+                            <circle cx="170" cy="110" r="30" fill="#29B6F6" stroke="#0B5091" stroke-width="2"/>
+                            <text x="170" y="115" text-anchor="middle" fill="white" font-weight="bold" font-size="12">VERIFY</text>
+                            
+                            <!-- Result Arrow -->
+                            <path d="M210,110 L240,110" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round"/>
+                            <polygon points="240,105 250,110 240,115" fill="#333"/>
+                            
+                            <!-- Result -->
+                            <rect x="260" y="90" width="30" height="40" rx="5" fill="#FF7043" stroke="#E65100" stroke-width="2"/>
+                            <text x="275" y="115" text-anchor="middle" font-size="14" fill="white" font-weight="bold">98%</text>
+                            <text x="275" y="145" text-anchor="middle" font-size="10" fill="#0B5091" font-weight="bold">MATCH</text>
+                        </svg>
+                    </div>
+                    
+                    <p>The SDK provides a simple similarity score (0-100%) that your app can use to make decisions about user authentication, access control, or personalized experiences.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="next-steps">
+            <h2>Ready to Get Started?</h2>
+            <p>Implementing facial recognition has never been easier. Download the SDK today and add powerful face detection to your Android app in minutes.</p>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/tree/main/android-aar" class="btn">Download SDK</a>
+            <a href="https://github.com/VladimirOnix/PerchEye-SDK/blob/main/README.md" class="btn" style="background-color: rgba(255,255,255,0.2); color: white;">View Documentation</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>&copy; 2025 PerchEye SDK. All rights reserved.</p>
+        <div style="margin-top: 1rem;">
+            <a href="https://vladimironix.github.io/PerchEye-SDK" style="color: white; margin: 0 10px;">Home</a>
+            <a href="" style="color: white; margin: 0 10px;">How to Use</a>
+        </div>
+    </div>
+</body>
+</html>
