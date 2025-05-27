@@ -7,11 +7,21 @@
     <link rel="icon" type="image/png" href="assets/logo.png" />
     <style>
         :root {
-            --dark-blue: #0B5091;
-            --medium-blue: #1976D2;
-            --bright-blue: #29B6F6;
-            --light-blue: #81D4FA;
-            --pale-blue: #E3F2FD;
+            --dark-blue: #1E88E5;
+            --medium-blue: #42A5F5;
+            --bright-blue: #64B5F6;
+            --light-blue: #90CAF9;
+            --pale-blue: #1A1A2E;
+            --background-color: #040620;
+            --surface-color: #1E1E1E;
+            --text-color: #E0E0E0;
+            --text-color-secondary: #B0B0B0;
+            --border-color: #333333;
+            --code-background: #151515;
+            --code-text: #BBBBBB;
+            --code-comment: #6A9955;
+            --code-keyword: #4B89C1;
+            --code-string: #B57B66;
             --orange: #FF7043;
             --yellow: #FFCA28;
         }
@@ -20,17 +30,17 @@
             font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--pale-blue);
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
         
         .header {
-            background: var(--dark-blue);
-            color: white;
+            background: var(--surface-color);
+            color: var(--text-color);
             padding: 1rem;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .container {
@@ -49,13 +59,13 @@
             font-size: 2rem;
             font-weight: bold;
             margin-left: 1rem;
-            color: white;
+            color: var(--text-color);
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: var(--dark-blue);
+            color: var(--bright-blue);
             text-align: center;
         }
         
@@ -71,22 +81,23 @@
         }
         
         .nav-links a {
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
             margin: 0 1rem;
             font-weight: 500;
         }
         
         .nav-links a:hover {
-            text-decoration: underline;
+            color: var(--bright-blue);
+            text-decoration: none;
         }
         
         .intro {
-            background-color: white;
+            background-color: var(--surface-color);
             border-radius: 12px;
             padding: 2rem;
             margin-bottom: 3rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             text-align: center;
         }
         
@@ -97,10 +108,10 @@
         }
         
         .step-card {
-            background-color: white;
+            background-color: var(--surface-color);
             border-radius: 12px;
             padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: flex;
             gap: 2rem;
             align-items: flex-start;
@@ -129,18 +140,19 @@
         
         .step-content h3 {
             margin-top: 0;
-            color: var(--dark-blue);
+            color: var(--light-blue);
             font-size: 1.5rem;
         }
         
         .code-block {
-            background-color: #f5f5f5;
+            background-color: var(--code-background);
             border-radius: 5px;
             padding: 1rem;
             margin: 1rem 0;
             overflow-x: auto;
             font-family: monospace;
             border-left: 4px solid var(--bright-blue);
+            color: var(--code-text);
         }
         
         .code-block pre {
@@ -158,7 +170,7 @@
         .btn {
             display: inline-block;
             background-color: var(--bright-blue);
-            color: white;
+            color: var(--text-color);
             padding: 0.8rem 1.5rem;
             border-radius: 4px;
             text-decoration: none;
@@ -176,8 +188,8 @@
         }
         
         .footer {
-            background-color: var(--dark-blue);
-            color: white;
+            background-color: var(--surface-color);
+            color: var(--text-color);
             text-align: center;
             padding: 2rem;
             margin-top: 4rem;
@@ -189,12 +201,12 @@
             border-radius: 12px;
             text-align: center;
             margin-top: 3rem;
-            color: white;
+            color: var(--text-color);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
         .next-steps h2 {
-            color: white;
+            color: var(--text-color);
             margin-top: 0;
         }
         
