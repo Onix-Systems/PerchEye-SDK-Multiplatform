@@ -1,7 +1,7 @@
 name: perch_eye
 description: Flutter plugin for PerchEye SDK
 version: 0.0.1
-homepage: https://github.com/VladimirOnix/PerchEye-SDK/tree/main/flutter
+homepage: https://github.com/Onix-Systems/PerchEye-SDK-Multiplatform/tree/main/flutter
 
 dependencies:
   flutter:
