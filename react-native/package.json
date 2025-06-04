@@ -1,6 +1,6 @@
 {
   "name": "react-native-perch-eye",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "High-performance React Native SDK for face recognition and verification using native TensorFlow and C++ engine. Extract and compare unique face hashes from images with zero dependencies.",
   "main": "src/index.tsx",
   "scripts": {
