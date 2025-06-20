@@ -1,0 +1,13 @@
+//
+//  PerchBridge.modulemap
+//  perch-eye-ios
+//
+//  Created by Sergey Pritula on 27.05.2025.
+//
+
+module PerchEyeBridge {
+    umbrella header "PerchEyeiOS.h"
+
+    export *
+    module * { export * }
+}
