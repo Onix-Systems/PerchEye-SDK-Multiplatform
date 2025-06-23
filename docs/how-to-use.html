@@ -298,7 +298,7 @@
                     <div class="code-block">
                             <pre>// Add the dependency
 dependencies {
-    implementation 'com.percheye.android:sdk:1.2.3'
+    implementation(files("libs/perch-eye-1.0.3-4.aar"))
 }</pre>
                     </div>
                 </div>
@@ -355,11 +355,10 @@ if (result == ImageResult.SUCCESS) {
                     <p>Add the PerchEye framework to your iOS project using CocoaPods:</p>
 
                     <div class="code-block">
-                            <pre># Podfile
-pod 'PerchEyeFramework', '~> 1.0'
-
-# Then run
-pod install</pre>
+                        Download PerchEye Framework from the official source
+                        Drag PerchEyeFramework.xcframework into your Xcode project
+                        Ensure the framework is added to Frameworks, Libraries, and Embedded Content
+                        Set Embed & Sign for the framework
                     </div>
                 </div>
             </div>
