@@ -1,8 +1,3 @@
----
-# PerchEye Multiplatform SDK
-Full reference and usage guide for the PerchEye facial recognition SDK across Android, iOS, Flutter, and React Native platforms.
----
-
 # PerchEye Multiplatform SDK
 
 PerchEye SDK provides advanced facial recognition functionality for mobile applications across multiple platforms, enabling face detection, enrollment, verification, and comparison using embedded TensorFlow Lite models.
