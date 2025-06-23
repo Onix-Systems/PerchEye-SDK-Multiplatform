@@ -16,25 +16,25 @@ PerchEye SDK provides advanced facial recognition functionality for mobile appli
 
 ## 📦 Platform-Specific Documentation
 
-### Android SDK
+### [Android SDK](android/README.md)
 - **Location**: `/android/`
 - **Language**: Kotlin/Java
 - **Integration**: Gradle dependency
 - **Documentation**: Native Android implementation
 
-### iOS SDK
+### [iOS SDK](ios/README.md)
 - **Location**: `/ios/`
 - **Language**: Swift/Objective-C
 - **Integration**: CocoaPods/Swift Package Manager
 - **Documentation**: Native iOS implementation
 
-### Flutter Plugin
+### [Flutter Plugin](flutter/README.md)
 - **Location**: `/flutter/`
 - **Language**: Dart
 - **Integration**: pub.dev dependency
 - **Documentation**: Cross-platform Flutter plugin
 
-### React Native Module
+### [React Native Module](react-native/README.md)
 - **Location**: `/react-native/`
 - **Language**: JavaScript/TypeScript
 - **Integration**: npm package
@@ -129,10 +129,10 @@ All platforms return consistent status codes:
 
 Each platform includes a fully functional demo application:
 
-- **Android Demo** - `android-demo/` - Native Android app
-- **iOS Demo** - `ios-demo/` - Native iOS app
-- **Flutter Demo** - `flutter-demo/` - Cross-platform Flutter app
-- **React Native Demo** - `react-native-demo/` - Cross-platform RN app
+- **[Android Demo](android-demo/README.md)** - `android-demo/` - Native Android app
+- **[iOS Demo](ios-demo/README.md)** - `ios-demo/` - Native iOS app
+- **[Flutter Demo](flutter-demo/README.md)** - `flutter-demo/` - Cross-platform Flutter app
+- **[React Native Demo](react-native-demo/README.md)** - `react-native-demo/` - Cross-platform RN app
 
 ## 🛠 Development Setup
 
