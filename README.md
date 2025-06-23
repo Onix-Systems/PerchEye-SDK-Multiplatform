@@ -180,21 +180,23 @@ cd react-native && npm install
 #### Android
 ```gradle
 dependencies {
-    implementation 'com.percheye.android:sdk:1.2.3'
+    implementation(files("libs/perch-eye-1.0.3-4.aar"))
 }
 ```
 
 #### iOS
 ```ruby
-# Podfile
-pod 'PerchEyeFramework', '~> 1.0'
+# Download PerchEye Framework from the official source
+# Drag PerchEyeFramework.xcframework into your Xcode project
+# Ensure the framework is added to Frameworks, Libraries, and Embedded Content
+# Set Embed & Sign for the framework
 ```
 
 #### Flutter
 ```yaml
-# pubspec.yaml
-dependencies:
-  perch_eye: ^0.0.1
+# Run this in your Flutter project:
+
+flutter pub add perch_eye
 ```
 
 #### React Native
