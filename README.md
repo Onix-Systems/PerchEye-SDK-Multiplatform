@@ -16,8 +16,8 @@ PerchEye SDK provides advanced facial recognition functionality for mobile appli
 
 ## 📦 Platform-Specific Documentation
 
-### [Android SDK](android/README.md)
-- **Location**: `/android/`
+### [Android SDK](android-aar/README.md)
+- **Location**: `/android-aar/`
 - **Language**: Kotlin/Java
 - **Integration**: Gradle dependency
 - **Documentation**: Native Android implementation
