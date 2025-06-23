@@ -10,7 +10,7 @@ The SDK is built on top of **TensorFlow** and **C++**, with **zero dependencies*
 To include the SDK in your project, add the following line to your app-level `build.gradle`:
 
 ```kotlin
-implementation(files("libs/perch-eye-1.0.2-3.aar"))
+implementation(files("libs/perch-eye-1.0.3-4.aar"))
 ```
 
 ---
