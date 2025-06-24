@@ -21,6 +21,6 @@ Flutter plugin for PerchEye face recognition SDK.
   # PerchEye Framework
   s.vendored_frameworks = 'Frameworks/PerchEyeFramework.framework'
   
-  # TensorFlow Lite dependency (якщо потрібно)
+  # TensorFlow Lite dependency
   # s.vendored_frameworks = 'Frameworks/TensorFlowLiteC.xcframework'
 end
