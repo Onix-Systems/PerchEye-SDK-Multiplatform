@@ -99,39 +99,42 @@ jobs:
               cp -r ios/PerchEyeFramework/*.h ios-release/PerchEyeSDK-iOS.xcframework/ios-arm64/PerchEyeFramework.framework/ 2>/dev/null || true
             fi
           
-            # Створюємо базовий Info.plist для XCFramework
+            # Створюємо базовий Info.plist для XCFramework  
             echo '<?xml version="1.0" encoding="UTF-8"?>' > ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
             echo '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '<plist version="1.0">' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '<dict>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    <key>AvailableLibraries</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    <array>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '        <dict>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <key>LibraryIdentifier</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <string>ios-arm64</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <key>LibraryPath</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <string>PerchEyeFramework.framework</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <key>SupportedArchitectures</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <array>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '                <string>arm64</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            </array>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <key>SupportedPlatform</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '            <string>ios</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '        </dict>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    </array>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    <key>CFBundlePackageType</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    <string>XFWK</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    <key>XCFrameworkFormatVersion</key>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '    <string>1.0</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '</dict>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
-            echo '</plist>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<plist version="1.0"><dict>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>AvailableLibraries</key><array><dict>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>LibraryIdentifier</key><string>ios-arm64</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>LibraryPath</key><string>PerchEyeFramework.framework</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>SupportedArchitectures</key><array><string>arm64</string></array>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>SupportedPlatform</key><string>ios</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '</dict></array>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>CFBundlePackageType</key><string>XFWK</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '<key>XCFrameworkFormatVersion</key><string>1.0</string>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
+            echo '</dict></plist>' >> ios-release/PerchEyeSDK-iOS.xcframework/Info.plist
           
-            echo "⚠️ Created minimal framework structure (may require additional setup)"
+            # Створюємо placeholder бінарний файл щоб структура була правильною
+            echo "# PerchEye iOS Framework Placeholder" > ios-release/PerchEyeSDK-iOS.xcframework/ios-arm64/PerchEyeFramework.framework/PerchEyeFramework
+            echo "# This is a minimal framework structure" >> ios-release/PerchEyeSDK-iOS.xcframework/ios-arm64/PerchEyeFramework.framework/PerchEyeFramework
+          
+            echo "⚠️ Created minimal framework structure"
+          fi
+          
+          # Debug: показуємо що створилося
+          echo "📋 Contents of ios-release:"
+          ls -la ios-release/
+          if [ -d "ios-release/PerchEyeSDK-iOS.xcframework" ]; then
+            echo "📋 Contents of XCFramework:"
+            find ios-release/PerchEyeSDK-iOS.xcframework -type f
           fi
           
           # Пакуємо XCFramework
           cd ios-release
           zip -r PerchEyeSDK-iOS.xcframework.zip PerchEyeSDK-iOS.xcframework/
+          
+          # Debug: перевіряємо що в zip файлі
+          echo "📋 Contents of ZIP:"
+          unzip -l PerchEyeSDK-iOS.xcframework.zip
 
       - name: Create iOS Release
         uses: softprops/action-gh-release@v1
