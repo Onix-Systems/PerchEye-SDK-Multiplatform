@@ -10,15 +10,27 @@ Flutter plugin for PerchEye face recognition SDK.
   s.author           = { 'Onix Systems' => 'info@onix-systems.com' }
   
   s.source           = { :path => '.' }
-  s.source_files = [
-    'Classes/**/*'
-  ]
-  s.dependency 'Flutter'
-  s.platform = :ios, '12.0'
 
+  # Include only the plugin Swift code
+  s.source_files = 'Classes/**/*'
+
+  # Include the pre-built framework
+  s.vendored_frameworks = 'Frameworks/PerchEyeFramework.framework'
+
+  # Ensure TensorFlow headers are not exposed
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
-    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386'
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386',
+    'HEADER_SEARCH_PATHS' => '$(inherited)',
+    'FRAMEWORK_SEARCH_PATHS' => '$(inherited) $(PODS_ROOT)/../.symlinks/plugins/perch_eye/ios/Frameworks'
   }
+
+  s.dependency 'Flutter'
+  s.platform = :ios, '12.0'
   s.swift_version = '5.0'
+
+  # Exclude TensorFlow headers from being copied
+  s.prepare_command = <<-CMD
+    find Frameworks -name "*.h" -path "*/TensorFlowLiteC.xcframework/*" -delete || true
+  CMD
 end
