@@ -17,3 +17,5 @@ flutter:
       android:
         package: com.percheye.flutter
         pluginClass: PerchEyePlugin
+      ios:
+        pluginClass: PerchEyePlugin
