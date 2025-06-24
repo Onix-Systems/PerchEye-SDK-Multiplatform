@@ -1,0 +1,100 @@
+name: Create Releases
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (e.g., 1.0.3-4)'
+        required: true
+
+env:
+  INPUT_VERSION: ${{ github.event.inputs.version || github.ref_name }}
+
+jobs:
+  android-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Android Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: android-${{ env.INPUT_VERSION }}
+          name: Android SDK ${{ env.INPUT_VERSION }}
+          body: |
+            # Android SDK Release
+            
+            **What's included:**
+            - Android AAR library: `perch-eye-${{ env.INPUT_VERSION }}.aar`
+            - Demo application
+            - Documentation
+          files: |
+            android-aar/*.aar
+            android-demo/**/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  ios-release:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build iOS Framework
+        run: |
+          cd ios
+          if [ -f "build_xcframework.sh" ]; then
+            chmod +x build_xcframework.sh
+            ./build_xcframework.sh
+          fi
+
+      - name: Package iOS
+        run: |
+          mkdir ios-package
+          cp -r ios/* ios-package/
+          cp -r ios-demo ios-package/
+          zip -r ios-sdk-v1.0.0.zip ios-package/
+
+      - name: Create iOS Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ios-v1.0.0
+          name: iOS SDK v1.0.0
+          body: |
+            # iOS SDK Release v1.0.0
+            
+            **What's included:**
+            - iOS XCFramework
+            - Demo application
+            - Documentation
+          files: ios-sdk-v1.0.0.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  docs-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+
+      - name: Create Docs Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: docs-v1.0.0
+          name: Documentation v1.0.0
+          body: |
+            # Documentation v1.0.0
+            
+            📖 **Live Documentation:** https://onix-systems.github.io/PerchEye-SDK-Multiplatform
+            
+            Visit the link above for the latest documentation.
+            No files attached - documentation is available online only.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
