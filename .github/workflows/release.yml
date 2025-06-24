@@ -1,10 +1,9 @@
-# .github/workflows/release.yml
 name: Create Releases
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       version:
@@ -12,7 +11,8 @@ on:
         required: true
 
 env:
-  INPUT_VERSION: ${{ github.event.inputs.version || github.ref_name }}
+  # Використовуємо commit hash для версії Android або input version
+  ANDROID_VERSION: ${{ github.event.inputs.version || github.sha }}
 
 jobs:
   android-release:
@@ -20,18 +20,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Get short commit hash
+        id: vars
+        run: echo "short_sha=$(echo ${{ github.sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
+
       - name: Create Android Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: android-${{ env.INPUT_VERSION }}
-          name: Android SDK ${{ env.INPUT_VERSION }}
+          tag_name: android-${{ github.event.inputs.version || steps.vars.outputs.short_sha }}
+          name: Android SDK ${{ github.event.inputs.version || steps.vars.outputs.short_sha }}
           body: |
             # Android SDK Release
             
             **What's included:**
-            - Android AAR library: `perch-eye-${{ env.INPUT_VERSION }}.aar`
+            - Android AAR library
             - Demo application
             - Documentation
+            
+            **Build from commit:** ${{ github.sha }}
           files: |
             android-aar/*.aar
             android-demo/**/*
@@ -70,7 +76,8 @@ jobs:
             - iOS XCFramework
             - Demo application
             - Documentation
-          files: ios-sdk-v1.0.0.zip
+            
+            **Build from commit:** ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -97,5 +104,7 @@ jobs:
             
             Visit the link above for the latest documentation.
             No files attached - documentation is available online only.
+            
+            **Updated from commit:** ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
