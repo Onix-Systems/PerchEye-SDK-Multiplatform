@@ -60,30 +60,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   ios-release:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '16.2'
-
-      - name: Build iOS Framework
-        run: |
-          cd ios
-          if [ -f "build_xcframework.sh" ]; then
-            chmod +x build_xcframework.sh
-            ./build_xcframework.sh
-          else
-            echo "Build script not found, creating placeholder framework"
-            mkdir -p build_framework
-            echo "iOS Framework placeholder" > build_framework/framework.txt
-          fi
-
-      - name: Package iOS
+      - name: Package iOS Sources
         run: |
           mkdir ios-package
+          # Копіюємо тільки сирці без збірки
           cp -r ios/* ios-package/
           if [ -d "ios-demo" ]; then
             cp -r ios-demo ios-package/
@@ -99,9 +83,11 @@ jobs:
             # iOS SDK Release v1.0.0
             
             **What's included:**
-            - iOS XCFramework
-            - Demo application
+            - iOS Framework sources (requires building)
+            - Demo application project
             - Documentation
+            
+            **Note:** Build the framework yourself using the included build script.
             
             **Build from commit:** ${{ github.sha }}
           files: ios-sdk-v1.0.0.zip
