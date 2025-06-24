@@ -100,7 +100,7 @@ jobs:
             fi
           
             # Створюємо базовий Info.plist для XCFramework
-            cat > ios-release/PerchEyeSDK-iOS.xcframework/Info.plist << 'EOF'
+            cat > ios-release/PerchEyeSDK-iOS.xcframework/Info.plist << 'PLIST_EOF'
   <?xml version="1.0" encoding="UTF-8"?>
   <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
   <plist version="1.0">
@@ -141,7 +141,7 @@ jobs:
   <string>1.0</string>
   </dict>
   </plist>
-  EOF
+  PLIST_EOF
   
   echo "⚠️ Created minimal framework structure (may require additional setup)"
   fi
