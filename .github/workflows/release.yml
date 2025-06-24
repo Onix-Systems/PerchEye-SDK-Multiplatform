@@ -64,44 +64,68 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '16.2'
-
-      - name: Build iOS XCFramework
+      - name: Check for missing C++ dependencies
         run: |
-          cd ios
-          if [ -f "build_xcframework.sh" ]; then
-            chmod +x build_xcframework.sh
-            ./build_xcframework.sh
-          else
-            echo "❌ XCFramework build failed - missing dependencies"
-            echo "Creating source package instead..."
-            mkdir -p build_framework
-            cp -r . build_framework/PerchEyeFramework-Sources
-            echo "⚠️ This package contains sources only. Build manually." > build_framework/BUILD_INSTRUCTIONS.txt
+          echo "🔍 Checking for required C++ files..."
+          
+          # Перевіряємо чи існують потрібні C++ файли
+          if [ ! -d "perch-eye-sdk-core" ]; then
+            echo "❌ Missing perch-eye-sdk-core directory"
+            echo "The iOS framework requires C++ core files that are not included in this repository."
+            echo "BUILD_STATUS=failed" >> $GITHUB_ENV
+            exit 0
           fi
+          
+          echo "BUILD_STATUS=success" >> $GITHUB_ENV
 
       - name: Package iOS Release
         run: |
-          cd ios
-          if [ -d "build_framework/PerchEyeSDK-iOS.xcframework" ]; then
-            echo "✅ Packaging XCFramework..."
-            # Створюємо ZIP з XCFramework
-            cd build_framework
-            zip -r ../PerchEyeSDK-iOS.xcframework.zip PerchEyeSDK-iOS.xcframework/
-            cd ..
+          # Завжди пакуємо сирці оскільки С++ core відсутній
+          echo "📦 Packaging iOS framework sources..."
           
-            # Додаємо демо проект окремо
-            if [ -d "../ios-demo" ]; then
-              zip -r ios-demo.zip ../ios-demo/
-            fi
-          else
-            echo "⚠️ Packaging sources..."
-            # Пакуємо сирці якщо build не вдалося
-            zip -r PerchEyeFramework-Sources.zip build_framework/ ../ios-demo/
+          mkdir -p ios-release-package
+          
+          # Копіюємо iOS framework сирці
+          cp -r ios/ ios-release-package/PerchEyeFramework-iOS/
+          
+          # Копіюємо демо проект якщо є
+          if [ -d "ios-demo" ]; then
+            cp -r ios-demo/ ios-release-package/ios-demo/
           fi
+          
+          # Створюємо інструкції
+          cat > ios-release-package/BUILD_INSTRUCTIONS.md << 'EOF'
+          # iOS Framework Build Instructions
+          
+          ## ⚠️ Missing Dependencies
+          
+          This iOS framework requires C++ core files that are not included in this repository.
+          
+          ### Required files:
+          - `perch-eye-sdk-core/cpp/perch_eye_core.cpp`
+          - `perch-eye-sdk-core/cpp/perch-eye-core/model/tf_model.cpp`
+          - And related header files
+          
+          ### To build the XCFramework:
+          
+          1. Add the missing C++ core files to your project
+          2. Update file paths in Xcode project if needed
+          3. Run the build script:
+             ```bash
+             cd PerchEyeFramework-iOS
+             chmod +x build_xcframework.sh
+             ./build_xcframework.sh
+             ```
+          
+          ### Alternative options:
+          - Contact the repository maintainers for the complete source code
+          - Use a pre-built XCFramework if available
+          - Remove C++ dependencies and use Swift-only implementation
+          
+          EOF
+          
+          # Пакуємо все разом
+          zip -r PerchEyeFramework-iOS-Sources.zip ios-release-package/
 
       - name: Create iOS Release
         uses: softprops/action-gh-release@v1
@@ -111,20 +135,22 @@ jobs:
           body: |
             # iOS SDK Release v1.0.0
             
-            **What's included:**
-            - `PerchEyeSDK-iOS.xcframework.zip` - Ready-to-use XCFramework 
-            - `ios-demo.zip` - Demo application project
+            ⚠️ **Source Code Only - Build Required**
             
-            **How to use:**
-            1. Download `PerchEyeSDK-iOS.xcframework.zip`
-            2. Extract and drag `PerchEyeSDK-iOS.xcframework` into your Xcode project
-            3. Set framework to "Embed & Sign" in target settings
-            4. Import: `import PerchEyeFramework`
+            **What's included:**
+            - `PerchEyeFramework-iOS-Sources.zip` - iOS Framework source code
+            - Build instructions and dependency information
+            - iOS demo project
+            
+            **Important Notes:**
+            - This package contains **source code only**
+            - Requires additional C++ core files (not included)
+            - See `BUILD_INSTRUCTIONS.md` for details
+            - No pre-built XCFramework available due to missing dependencies
             
             **Build from commit:** ${{ github.sha }}
           files: |
-            ios/PerchEyeSDK-iOS.xcframework.zip
-            ios/ios-demo.zip
+            ios/PerchEyeFramework-iOS-Sources.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
