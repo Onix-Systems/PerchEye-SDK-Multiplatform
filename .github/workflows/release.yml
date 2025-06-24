@@ -30,7 +30,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: android-${{ github.event.inputs.version || steps.vars.outputs.short_sha }}
-          name: Android SDK ${{ github.event.inputs.version || steps.vars.outputs.short_sha }}
+          name: Android SDK
           body: |
             # Android SDK Release
             
@@ -46,8 +46,6 @@ jobs:
                    implementation(files("libs/perch-eye-X.Y.Z.aar"))
                }
                ```
-            
-            **Build from commit:** ${{ github.sha }}
           files: |
             android-aar/*.aar
         env:
@@ -128,11 +126,9 @@ jobs:
             find ios-release/PerchEyeSDK-iOS.xcframework -type f
           fi
           
-          # Пакуємо XCFramework
           cd ios-release
           zip -r PerchEyeSDK-iOS.xcframework.zip PerchEyeSDK-iOS.xcframework/
           
-          # Debug: перевіряємо що в zip файлі
           echo "📋 Contents of ZIP:"
           unzip -l PerchEyeSDK-iOS.xcframework.zip
 
@@ -140,9 +136,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ios-v1.0.0
-          name: iOS SDK v1.0.0
+          name: iOS SDK
           body: |
-            # iOS SDK Release v1.0.0
+            # iOS SDK Release
             
             **What's included:**
             - `PerchEyeSDK-iOS.xcframework.zip` - iOS XCFramework (ready to use)
@@ -153,12 +149,6 @@ jobs:
             3. Drag `PerchEyeSDK-iOS.xcframework` into your Xcode project
             4. In target settings, set framework to "Embed & Sign"
             5. Import in your Swift code: `import PerchEyeFramework`
-            
-            **Supported platforms:**
-            - iOS 14.0+ (Device: arm64)
-            - iOS Simulator 14.0+ (arm64, x86_64)
-            
-            **Build from commit:** ${{ github.sha }}
           files: |
             ios-release/PerchEyeSDK-iOS.xcframework.zip
         env:
@@ -179,15 +169,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: docs-v1.0.0
-          name: Documentation v1.0.0
+          name: Documentation
           body: |
-            # Documentation v1.0.0
-            
             📖 **Live Documentation:** https://onix-systems.github.io/PerchEye-SDK-Multiplatform
-            
-            Visit the link above for the latest documentation.
-            No files attached - documentation is available online only.
-            
-            **Updated from commit:** ${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
