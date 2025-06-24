@@ -1,0 +1,279 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "PerchEyeFramework",
+    "printedName": "PerchEyeFramework",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "PerchEyeFramework",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PerchEyeSwift",
+        "printedName": "PerchEyeSwift",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PerchEyeSwift",
+                "printedName": "PerchEyeFramework.PerchEyeSwift",
+                "usr": "s:17PerchEyeFramework0aB5SwiftC"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:17PerchEyeFramework0aB5SwiftCACycfc",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftCACycfc",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "openTransaction",
+            "printedName": "openTransaction()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC15openTransactionyyF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC15openTransactionyyF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "load",
+            "printedName": "load(image:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ImageResult",
+                "printedName": "PerchEyeFramework.ImageResult",
+                "usr": "c:@E@ImageResult"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIImage",
+                "printedName": "UIKit.UIImage",
+                "usr": "c:objc(cs)UIImage"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC4load5imageSo11ImageResultVSo7UIImageC_tF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC4load5imageSo11ImageResultVSo7UIImageC_tF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "DiscardableResult",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "verify",
+            "printedName": "verify(hash:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC6verify4hashSfSS_tF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC6verify4hashSfSS_tF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "compare",
+            "printedName": "compare(images:withHash:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Float",
+                "printedName": "Swift.Float",
+                "usr": "s:Sf"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[UIKit.UIImage]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC7compare6images8withHashSfSaySo7UIImageCG_SStF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC7compare6images8withHashSfSaySo7UIImageCG_SStF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "evaluate",
+            "printedName": "evaluate(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[UIKit.UIImage]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIImage",
+                    "printedName": "UIKit.UIImage",
+                    "usr": "c:objc(cs)UIImage"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC8evaluateySSSaySo7UIImageCGF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC8evaluateySSSaySo7UIImageCGF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "enroll",
+            "printedName": "enroll()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC6enrollSSyF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC6enrollSSyF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "destroy",
+            "printedName": "destroy()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:17PerchEyeFramework0aB5SwiftC7destroyyyF",
+            "mangledName": "$s17PerchEyeFramework0aB5SwiftC7destroyyyF",
+            "moduleName": "PerchEyeFramework",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:17PerchEyeFramework0aB5SwiftC",
+        "mangledName": "$s17PerchEyeFramework0aB5SwiftC",
+        "moduleName": "PerchEyeFramework",
+        "declAttributes": [
+          "Final",
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": []
+}

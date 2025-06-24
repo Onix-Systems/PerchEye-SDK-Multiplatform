@@ -211,12 +211,12 @@
     "@babel/template" "^7.27.0"
     "@babel/types" "^7.27.0"
 
-"@babel/parser@^7.1.0", "@babel/parser@^7.14.7", "@babel/parser@^7.20.7", "@babel/parser@^7.23.9", "@babel/parser@^7.25.3", "@babel/parser@^7.26.10", "@babel/parser@^7.27.0", "@babel/parser@^7.27.1", "@babel/parser@^7.27.2":
-  version "7.27.2"
-  resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.27.2.tgz"
-  integrity sha512-QYLs8299NA7WM/bZAdp+CviYYkVoYXlDW2rzliy3chxd1PQjej7JORuMJDJXJUb9g0TT+B99EwaVLKmX+sPXWw==
+"@babel/parser@^7.1.0", "@babel/parser@^7.14.7", "@babel/parser@^7.20.7", "@babel/parser@^7.23.9", "@babel/parser@^7.25.3", "@babel/parser@^7.26.10", "@babel/parser@^7.27.0", "@babel/parser@^7.27.1", "@babel/parser@^7.27.2", "@babel/parser@^7.27.5":
+  version "7.27.5"
+  resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.27.5.tgz"
+  integrity sha512-OsQd175SxWkGlzbny8J3K8TnnDD0N3lrIUtB92xwyRpzaenGZhxDvxN/JgU00U3CDZNj9tPuDJ5H0WS4Nt3vKg==
   dependencies:
-    "@babel/types" "^7.27.1"
+    "@babel/types" "^7.27.3"
 
 "@babel/plugin-proposal-export-default-from@^7.24.7":
   version "7.25.9"
@@ -684,10 +684,10 @@
     debug "^4.3.1"
     globals "^11.1.0"
 
-"@babel/types@^7.0.0", "@babel/types@^7.20.7", "@babel/types@^7.25.2", "@babel/types@^7.25.9", "@babel/types@^7.26.10", "@babel/types@^7.27.0", "@babel/types@^7.27.1", "@babel/types@^7.3.3":
-  version "7.27.1"
-  resolved "https://registry.npmjs.org/@babel/types/-/types-7.27.1.tgz"
-  integrity sha512-+EzkxvLNfiUeKMgy/3luqfsCWFRXLb7U6wNQTk60tovuckwB15B191tJWvpp4HjiQWdJkCxO3Wbvc6jlk3Xb2Q==
+"@babel/types@^7.0.0", "@babel/types@^7.20.7", "@babel/types@^7.25.2", "@babel/types@^7.25.9", "@babel/types@^7.26.10", "@babel/types@^7.27.0", "@babel/types@^7.27.1", "@babel/types@^7.27.3", "@babel/types@^7.3.3":
+  version "7.27.6"
+  resolved "https://registry.npmjs.org/@babel/types/-/types-7.27.6.tgz"
+  integrity sha512-ETyHEk2VHHvl9b9jZP5IHPavHYk57EhanlRRuae9XCpb/j5bDCbPPMOBfCWhnl/7EDJz0jEMCi/RhccCE8r1+Q==
   dependencies:
     "@babel/helper-string-parser" "^7.27.1"
     "@babel/helper-validator-identifier" "^7.27.1"
@@ -5143,10 +5143,12 @@ react-native-image-picker@^8.2.0:
   resolved "https://registry.npmjs.org/react-native-image-picker/-/react-native-image-picker-8.2.0.tgz"
   integrity sha512-jIGllQJuJIn0YKss/JEeb0Kos1HSsnIpU+i3bYxR27sOxSyDZQyP9dKR22olssQPlfH+rGNR/Jc6xKRkhm48vw==
 
-react-native-perch-eye@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.npmjs.org/react-native-perch-eye/-/react-native-perch-eye-0.0.1.tgz"
-  integrity sha512-Q58f7jJM6fqCwtVeySS8BvRm8B0V1MGqPf9V56EJrpzC93wBMUhdc2DQxBR+28ZgittdvlgBK/w7xp/LE3XJtQ==
+"react-native-perch-eye@file:../react-native/react-native-perch-eye-0.0.2.tgz":
+  version "0.0.2"
+  resolved "file:../react-native/react-native-perch-eye-0.0.2.tgz"
+  integrity sha512-JtXUzxPsb+mD/XcY1SPmyy6MKUIzO1oec9HUp8tQhY7pQEK/3lze12fZOGUoDyJQs/Oq3TD0cOuENkJ8PFePUg==
+  dependencies:
+    "@babel/parser" "^7.27.5"
 
 react-native@*, react-native@^0.79.2, react-native@>=0.40.0:
   version "0.79.2"

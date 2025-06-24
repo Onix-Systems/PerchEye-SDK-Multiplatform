@@ -1,0 +1,22 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
+// swift-module-flags: -target arm64-apple-ios15.6 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name PerchEyeFramework
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+@_exported import PerchEyeFramework
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+final public class PerchEyeSwift {
+  public init()
+  @objc deinit
+  final public func openTransaction()
+  @discardableResult
+  final public func load(image: UIKit.UIImage) -> PerchEyeFramework.ImageResult
+  final public func verify(hash: Swift.String) -> Swift.Float
+  final public func compare(images: [UIKit.UIImage], withHash hash: Swift.String) -> Swift.Float
+  final public func evaluate(_ images: [UIKit.UIImage]) -> Swift.String
+  final public func enroll() -> Swift.String
+  final public func destroy()
+}

@@ -29,5 +29,8 @@
   "homepage": "https://github.com/Onix-Systems/PerchEye-SDK-Multiplatform/tree/main/react-native#readme",
   "peerDependencies": {
     "react-native": ">=0.40.0"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.27.5"
   }
 }

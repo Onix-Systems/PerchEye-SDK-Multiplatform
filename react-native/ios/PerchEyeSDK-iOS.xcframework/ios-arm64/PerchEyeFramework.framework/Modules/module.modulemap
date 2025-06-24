@@ -1,0 +1,11 @@
+framework module PerchEyeFramework {
+  umbrella header "PerchEyeFramework.h"
+  export *
+
+  module * { export * }
+}
+
+module PerchEyeFramework.Swift {
+  header "PerchEyeFramework-Swift.h"
+  requires objc
+}
