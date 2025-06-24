@@ -32,5 +32,12 @@
   },
   "dependencies": {
     "@babel/parser": "^7.27.5"
-  }
+  },
+  "types": "src/index.tsx",
+  "files": [
+    "ios",
+    "android",
+    "src",
+    "react-native-perch-eye.podspec"
+  ]
 }

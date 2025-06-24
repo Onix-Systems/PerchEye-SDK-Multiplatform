@@ -11,7 +11,7 @@ import React
 
 @objc(PerchEyeModule)
 class PerchEyeModule: NSObject {
-  private var perchEye: PerchEyeSwift? = nil
+  private var perchEye: PerchEyeSwift? = PerchEyeSwift()
 
   @objc
   func initSDK(_ resolve: RCTPromiseResolveBlock, rejecter reject: RCTPromiseRejectBlock) {

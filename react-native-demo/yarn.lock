@@ -5146,7 +5146,7 @@ react-native-image-picker@^8.2.0:
 "react-native-perch-eye@file:../react-native/react-native-perch-eye-0.0.2.tgz":
   version "0.0.2"
   resolved "file:../react-native/react-native-perch-eye-0.0.2.tgz"
-  integrity sha512-/VZN+CBZM3flDuQYmRk0+r95Wc2lMbWgmcR+hIROJqa4a5JLhW8kIWIpXkYxUX0OBrRLlcoZJCumw2q8+AQcxQ==
+  integrity sha512-kBPhx8w8iunSJZldlb82/2s2FhCYw8qd9c/05vqCOHpMENB9n0VAl+7IuL/jfV5ScBb3vlRa0Mg020kn57jU5w==
   dependencies:
     "@babel/parser" "^7.27.5"
 
