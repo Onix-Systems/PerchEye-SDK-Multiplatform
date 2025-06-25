@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerchEye SDK - Integration Examples</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <style>
+        :root {
+            --dark-blue: #1E88E5;
+            --medium-blue: #42A5F5;
+            --bright-blue: #64B5F6;
+            --light-blue: #90CAF9;
+            --pale-blue: #1A1A2E;
+            --background-color: #040620;
+            --surface-color: #1E1E1E;
+            --text-color: #E0E0E0;
+            --text-color-secondary: #B0B0B0;
+            --border-color: #333333;
+            --code-background: #151515;
+            --code-text: #BBBBBB;
+            --code-comment: #6A9955;
+            --code-keyword: #4B89C1;
+            --code-string: #B57B66;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--surface-color);
+            color: var(--text-color);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            color: var(--text-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--bright-blue);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--medium-blue);
+            margin-top: 2.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--light-blue);
+            margin-top: 2rem;
+        }
+        
+        .intro {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        .platform-selector {
+            display: flex;
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .platform-tab {
+            flex: 1;
+            padding: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-color-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .platform-tab.active {
+            background: linear-gradient(135deg, var(--medium-blue), var(--dark-blue));
+            color: white;
+        }
+
+        .platform-tab:hover:not(.active) {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        .platform-content {
+            display: none;
+        }
+
+        .platform-content.active {
+            display: block;
+        }
+
+        .code-block {
+            background-color: var(--code-background);
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-left: 4px solid var(--bright-blue);
+            color: var(--code-text);
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .code-comment {
+            color: var(--code-comment);
+        }
+
+        .code-keyword {
+            color: var(--code-keyword);
+        }
+
+        .code-string {
+            color: var(--code-string);
+        }
+
+        .note {
+            background-color: rgba(41, 182, 246, 0.1);
+            border-left: 4px solid var(--bright-blue);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .warning {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #FF9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .tip {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .use-case {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .use-case h3 {
+            color: var(--medium-blue);
+            margin-top: 0;
+        }
+
+        .toc {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .toc-title {
+            font-size: 1.3rem;
+            color: var(--bright-blue);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .toc-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--medium-blue);
+            text-decoration: none;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        .toc-section {
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .toc-subsection {
+            padding-left: 1.5rem;
+        }
+
+        .nav-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--bright-blue);
+            text-decoration: none;
+        }
+
+        .footer {
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .code-block {
+                font-size: 0.8rem;
+            }
+
+            .platform-selector {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo-container">
+        <img src="assets/logo.png" alt="PerchEye Logo" width="40" height="40" />
+        <span class="logo-text">PerchEye SDK</span>
+    </div>
+    <div class="nav-links">
+        <a href="">Home</a>
+        <a href="https://onix-systems.github.io/PerchEye-SDK-Multiplatform/how-to-use">How to Use</a>
+        <a href="https://onix-systems.github.io/PerchEye-SDK-Multiplatform/advantages.html">Advantages</a>
+        <a href="documentation.html" target="_blank">Documentation</a>
+        <a href="https://github.com/Onix-Systems/PerchEye-SDK-Multiplatform">Download</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="intro">
+        <h1>PerchEye SDK Integration Examples</h1>
+        <p>This page provides comprehensive examples of how to integrate and use the PerchEye SDK across Android, iOS, Flutter, and React Native platforms. Each code sample is designed to be clear, concise, and ready to use in your own projects.</p>
+    </div>
+
+    <div class="platform-selector">
+        <button class="platform-tab active" onclick="showPlatform('android')">Android</button>
+        <button class="platform-tab" onclick="showPlatform('ios')">iOS</button>
+        <button class="platform-tab" onclick="showPlatform('flutter')">Flutter</button>
+        <button class="platform-tab" onclick="showPlatform('react-native')">React Native</button>
+    </div>
+
+    <!-- Android Content -->
+    <div id="android" class="platform-content active">
+        <div class="toc">
+            <h3 class="toc-title">Android Examples</h3>
+            <ul class="toc-list">
+                <li><a href="#android-setup">1. Getting Started</a></li>
+                <li><a href="#android-detection">2. Face Detection</a></li>
+                <li><a href="#android-enrollment">3. Face Enrollment</a></li>
+                <li><a href="#android-verification">4. Face Verification</a></li>
+                <li><a href="#android-comparison">5. Face Comparison</a></li>
+                <li><a href="#android-use-cases">6. Common Use Cases</a></li>
+            </ul>
+        </div>
+
+        <h2 id="android-setup">1. Getting Started</h2>
+        <p>Add the PerchEye SDK to your Android project and perform the initial setup.</p>
+
+        <h3>Add Dependencies</h3>
+        <div class="code-block">
+                            <pre>// Add the dependency
+dependencies {
+    implementation(files("libs/perch-eye-1.0.3-4.aar"))
+}</pre>
+        </div>
+
+        <h3>Initialize the SDK</h3>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> com.percheye.android.PerchEye
+<span class="code-keyword">import</span> android.os.Bundle
+<span class="code-keyword">import</span> androidx.appcompat.app.AppCompatActivity
+
+<span class="code-keyword">class</span> MainActivity : AppCompatActivity() {
+
+    <span class="code-keyword">private</span> <span class="code-keyword">lateinit var</span> perchEye: PerchEye
+
+    <span class="code-keyword">override fun</span> onCreate(savedInstanceState: Bundle?) {
+        <span class="code-keyword">super</span>.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        <span class="code-comment">// Initialize the SDK</span>
+        perchEye = PerchEye(context)
+        perchEye.init()
+    }
+
+    <span class="code-keyword">override fun</span> onDestroy() {
+        <span class="code-keyword">super</span>.onDestroy()
+
+        <span class="code-comment">// Always destroy the SDK when done</span>
+        perchEye.destroy()
+    }
+}</pre>
+        </div>
+
+        <h2 id="android-detection">2. Face Detection</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">fun</span> detectFace(bitmap: Bitmap): ImageResult {
+    perchEye.openTransaction()
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+
+    <span class="code-keyword">when</span> (result) {
+        ImageResult.SUCCESS -> Log.d("PerchEye", "Face detected successfully")
+        ImageResult.FACE_NOT_FOUND -> Log.d("PerchEye", "No face found")
+        <span class="code-keyword">else</span> -> Log.d("PerchEye", "Error: $result")
+    }
+
+    <span class="code-keyword">return</span> result
+}</pre>
+        </div>
+
+        <h2 id="android-enrollment">3. Face Enrollment</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">fun</span> enrollFace(bitmap: Bitmap): String? {
+    perchEye.openTransaction()
+
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+
+    <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+        <span class="code-keyword">val</span> hash = perchEye.enroll()
+        saveUserFaceHash(userId, hash)
+        <span class="code-keyword">return</span> hash
+    }
+
+    <span class="code-keyword">return null</span>
+}</pre>
+        </div>
+
+        <h2 id="android-verification">4. Face Verification</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">fun</span> verifyFace(bitmap: Bitmap, storedHash: String): Float {
+    perchEye.openTransaction()
+
+    <span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+
+    <span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+        <span class="code-keyword">val</span> similarity = perchEye.verify(storedHash)
+        <span class="code-keyword">return</span> similarity
+    }
+
+    <span class="code-keyword">return</span> 0.0f
+}</pre>
+        </div>
+    </div>
+
+    <!-- iOS Content -->
+    <div id="ios" class="platform-content">
+        <div class="toc">
+            <h3 class="toc-title">iOS Examples</h3>
+            <ul class="toc-list">
+                <li><a href="#ios-setup">1. Getting Started</a></li>
+                <li><a href="#ios-detection">2. Face Detection</a></li>
+                <li><a href="#ios-enrollment">3. Face Enrollment</a></li>
+                <li><a href="#ios-verification">4. Face Verification</a></li>
+                <li><a href="#ios-comparison">5. Face Comparison</a></li>
+                <li><a href="#ios-use-cases">6. Common Use Cases</a></li>
+            </ul>
+        </div>
+
+        <h2 id="ios-setup">1. Getting Started</h2>
+        <p>Add the PerchEye framework to your iOS project and perform the initial setup.</p>
+
+        <h3>Add Dependencies</h3>
+        <div class="code-block">
+            <p># Download PerchEye Framework from the official source</p>
+            <p># Drag PerchEyeFramework.xcframework into your Xcode project</p>
+            <p># Ensure the framework is added to Frameworks, Libraries, and Embedded Content</p>
+            <p># Set Embed & Sign for the framework</p>
+        </div>
+
+        <h3>Initialize the SDK</h3>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> PerchEyeFramework
+
+<span class="code-keyword">class</span> ViewController: UIViewController {
+
+    <span class="code-keyword">private var</span> perchEye: PerchEyeSwift!
+
+    <span class="code-keyword">override func</span> viewDidLoad() {
+        <span class="code-keyword">super</span>.viewDidLoad()
+
+        <span class="code-comment">// Initialize the SDK</span>
+        perchEye = PerchEyeSwift()
+    }
+
+    <span class="code-keyword">deinit</span> {
+        <span class="code-comment">// SDK automatically destroys on deinit</span>
+        perchEye.destroy()
+    }
+}</pre>
+        </div>
+
+        <h2 id="ios-detection">2. Face Detection</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">func</span> detectFace(image: UIImage) -> ImageResult {
+    perchEye.openTransaction()
+    <span class="code-keyword">let</span> result = perchEye.load(image: image)
+
+    <span class="code-keyword">switch</span> result {
+    <span class="code-keyword">case</span> .success:
+        print("Face detected successfully")
+    <span class="code-keyword">case</span> .faceNotFound:
+        print("No face found")
+    <span class="code-keyword">default</span>:
+        print("Error: \(result)")
+    }
+
+    <span class="code-keyword">return</span> result
+}</pre>
+        </div>
+
+        <h2 id="ios-enrollment">3. Face Enrollment</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">func</span> enrollFace(image: UIImage) -> String? {
+    perchEye.openTransaction()
+
+    <span class="code-keyword">let</span> result = perchEye.load(image: image)
+
+    <span class="code-keyword">if</span> result == .success {
+        <span class="code-keyword">let</span> hash = perchEye.enroll()
+        saveUserFaceHash(userId: userId, hash: hash)
+        <span class="code-keyword">return</span> hash
+    }
+
+    <span class="code-keyword">return nil</span>
+}</pre>
+        </div>
+
+        <h2 id="ios-verification">4. Face Verification</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">func</span> verifyFace(image: UIImage, storedHash: String) -> Float {
+    perchEye.openTransaction()
+
+    <span class="code-keyword">let</span> result = perchEye.load(image: image)
+
+    <span class="code-keyword">if</span> result == .success {
+        <span class="code-keyword">let</span> similarity = perchEye.verify(hash: storedHash)
+        <span class="code-keyword">return</span> similarity
+    }
+
+    <span class="code-keyword">return</span> 0.0
+}</pre>
+        </div>
+    </div>
+
+    <!-- Flutter Content -->
+    <div id="flutter" class="platform-content">
+        <div class="toc">
+            <h3 class="toc-title">Flutter Examples</h3>
+            <ul class="toc-list">
+                <li><a href="#flutter-setup">1. Getting Started</a></li>
+                <li><a href="#flutter-detection">2. Face Detection</a></li>
+                <li><a href="#flutter-enrollment">3. Face Enrollment</a></li>
+                <li><a href="#flutter-verification">4. Face Verification</a></li>
+                <li><a href="#flutter-comparison">5. Face Comparison</a></li>
+                <li><a href="#flutter-use-cases">6. Common Use Cases</a></li>
+            </ul>
+        </div>
+
+        <h2 id="flutter-setup">1. Getting Started</h2>
+        <p>Add the PerchEye plugin to your Flutter project and perform the initial setup.</p>
+
+        <h3>Add Dependencies</h3>
+        <div class="code-block">
+                            <pre># Run this in your Flutter project:
+
+flutter pub add perch_eye</pre>
+        </div>
+
+        <h3>Initialize the SDK</h3>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> 'package:perch_eye/perch_eye.dart';
+
+<span class="code-keyword">class</span> FaceRecognitionService {
+
+  <span class="code-keyword">Future<void></span> initializeSDK() <span class="code-keyword">async</span> {
+    <span class="code-comment">// Initialize the SDK</span>
+    <span class="code-keyword">await</span> PerchEye.init();
+  }
+
+  <span class="code-keyword">Future<void></span> cleanup() <span class="code-keyword">async</span> {
+    <span class="code-comment">// Cleanup when done</span>
+    <span class="code-keyword">await</span> PerchEye.destroy();
+  }
+}</pre>
+        </div>
+
+        <h2 id="flutter-detection">2. Face Detection</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">Future<String></span> detectFace(String base64Image) <span class="code-keyword">async</span> {
+  <span class="code-keyword">await</span> PerchEye.openTransaction();
+  <span class="code-keyword">final</span> result = <span class="code-keyword">await</span> PerchEye.addImage(base64Image);
+
+  <span class="code-keyword">switch</span> (result) {
+    <span class="code-keyword">case</span> 'SUCCESS':
+      print('Face detected successfully');
+      <span class="code-keyword">break</span>;
+    <span class="code-keyword">case</span> 'FACE_NOT_FOUND':
+      print('No face found');
+      <span class="code-keyword">break</span>;
+    <span class="code-keyword">default</span>:
+      print('Error: $result');
+  }
+
+  <span class="code-keyword">return</span> result;
+}</pre>
+        </div>
+
+        <h2 id="flutter-enrollment">3. Face Enrollment</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">Future<String?></span> enrollFace(String base64Image) <span class="code-keyword">async</span> {
+  <span class="code-keyword">await</span> PerchEye.openTransaction();
+
+  <span class="code-keyword">final</span> result = <span class="code-keyword">await</span> PerchEye.addImage(base64Image);
+
+  <span class="code-keyword">if</span> (result == 'SUCCESS') {
+    <span class="code-keyword">final</span> hash = <span class="code-keyword">await</span> PerchEye.enroll();
+    <span class="code-keyword">await</span> saveUserFaceHash(userId, hash);
+    <span class="code-keyword">return</span> hash;
+  }
+
+  <span class="code-keyword">return null</span>;
+}</pre>
+        </div>
+
+        <h2 id="flutter-verification">4. Face Verification</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">Future<double></span> verifyFace(String base64Image, String storedHash) <span class="code-keyword">async</span> {
+  <span class="code-keyword">await</span> PerchEye.openTransaction();
+
+  <span class="code-keyword">final</span> result = <span class="code-keyword">await</span> PerchEye.addImage(base64Image);
+
+  <span class="code-keyword">if</span> (result == 'SUCCESS') {
+    <span class="code-keyword">final</span> similarity = <span class="code-keyword">await</span> PerchEye.verify(storedHash);
+    <span class="code-keyword">return</span> similarity;
+  }
+
+  <span class="code-keyword">return</span> 0.0;
+}</pre>
+        </div>
+    </div>
+
+    <!-- React Native Content -->
+    <div id="react-native" class="platform-content">
+        <div class="toc">
+            <h3 class="toc-title">React Native Examples</h3>
+            <ul class="toc-list">
+                <li><a href="#rn-setup">1. Getting Started</a></li>
+                <li><a href="#rn-detection">2. Face Detection</a></li>
+                <li><a href="#rn-enrollment">3. Face Enrollment</a></li>
+                <li><a href="#rn-verification">4. Face Verification</a></li>
+                <li><a href="#rn-comparison">5. Face Comparison</a></li>
+                <li><a href="#rn-use-cases">6. Common Use Cases</a></li>
+            </ul>
+        </div>
+
+        <h2 id="rn-setup">1. Getting Started</h2>
+        <p>Add the PerchEye module to your React Native project and perform the initial setup.</p>
+
+        <h3>Add Dependencies</h3>
+        <div class="code-block">
+                <pre><span class="code-comment"># Using npm</span>
+npm install react-native-perch-eye
+
+<span class="code-comment"># Using yarn</span>
+yarn add react-native-perch-eye
+
+<span class="code-comment"># For iOS, run pod install</span>
+cd ios && pod install</pre>
+        </div>
+
+        <h3>Initialize the SDK</h3>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> { init, destroy } <span class="code-keyword">from</span> 'react-native-perch-eye';
+
+<span class="code-keyword">class</span> FaceRecognitionService {
+
+  <span class="code-keyword">async</span> initializeSDK() {
+    <span class="code-comment">// Initialize the SDK</span>
+    <span class="code-keyword">await</span> init();
+  }
+
+  <span class="code-keyword">async</span> cleanup() {
+    <span class="code-comment">// Cleanup when done</span>
+    <span class="code-keyword">await</span> destroy();
+  }
+}</pre>
+        </div>
+
+        <h2 id="rn-detection">2. Face Detection</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> { openTransaction, addImage } <span class="code-keyword">from</span> 'react-native-perch-eye';
+
+<span class="code-keyword">async function</span> detectFace(base64Image) {
+  <span class="code-keyword">await</span> openTransaction();
+  <span class="code-keyword">const</span> result = <span class="code-keyword">await</span> addImage(base64Image);
+
+  <span class="code-keyword">switch</span> (result) {
+    <span class="code-keyword">case</span> 'SUCCESS':
+      console.log('Face detected successfully');
+      <span class="code-keyword">break</span>;
+    <span class="code-keyword">case</span> 'FACE_NOT_FOUND':
+      console.log('No face found');
+      <span class="code-keyword">break</span>;
+    <span class="code-keyword">default</span>:
+      console.log(`Error: ${result}`);
+  }
+
+  <span class="code-keyword">return</span> result;
+}</pre>
+        </div>
+
+        <h2 id="rn-enrollment">3. Face Enrollment</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> { openTransaction, addImage, enroll } <span class="code-keyword">from</span> 'react-native-perch-eye';
+
+<span class="code-keyword">async function</span> enrollFace(base64Image) {
+  <span class="code-keyword">await</span> openTransaction();
+
+  <span class="code-keyword">const</span> result = <span class="code-keyword">await</span> addImage(base64Image);
+
+  <span class="code-keyword">if</span> (result === 'SUCCESS') {
+    <span class="code-keyword">const</span> hash = <span class="code-keyword">await</span> enroll();
+    <span class="code-keyword">await</span> saveUserFaceHash(userId, hash);
+    <span class="code-keyword">return</span> hash;
+  }
+
+  <span class="code-keyword">return null</span>;
+}</pre>
+        </div>
+
+        <h2 id="rn-verification">4. Face Verification</h2>
+        <div class="code-block">
+                <pre><span class="code-keyword">import</span> { openTransaction, addImage, verify } <span class="code-keyword">from</span> 'react-native-perch-eye';
+
+<span class="code-keyword">async function</span> verifyFace(base64Image, storedHash) {
+  <span class="code-keyword">await</span> openTransaction();
+
+  <span class="code-keyword">const</span> result = <span class="code-keyword">await</span> addImage(base64Image);
+
+  <span class="code-keyword">if</span> (result === 'SUCCESS') {
+    <span class="code-keyword">const</span> similarity = <span class="code-keyword">await</span> verify(storedHash);
+    <span class="code-keyword">return</span> similarity;
+  }
+
+  <span class="code-keyword">return</span> 0.0;
+}</pre>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>Note:</strong> All platform implementations provide consistent APIs and return values. The similarity threshold of 0.8 is recommended for most use cases, but you can adjust it based on your security requirements.
+    </div>
+
+    <div class="tip">
+        <strong>Tip:</strong> For better accuracy across all platforms, use multiple images of the same face from different angles and lighting conditions when enrolling.
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 PerchEye SDK. All rights reserved.</p>
+</div>
+
+<script>
+    function showPlatform(platform) {
+        // Hide all platform contents
+        const contents = document.querySelectorAll('.platform-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // Remove active class from all tabs
+        const tabs = document.querySelectorAll('.platform-tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // Show selected platform content
+        document.getElementById(platform).classList.add('active');
+
+        // Add active class to clicked tab
+        event.target.classList.add('active');
+    }
+</script>
+</body>
+</html>

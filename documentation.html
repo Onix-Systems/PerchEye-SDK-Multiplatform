@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PerchEye SDK - Documentation</title>
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <style>
+        :root {
+            --dark-blue: #1E88E5;
+            --medium-blue: #42A5F5;
+            --bright-blue: #64B5F6;
+            --light-blue: #90CAF9;
+            --pale-blue: #1A1A2E;
+            --background-color: #040620;
+            --surface-color: #1E1E1E;
+            --text-color: #E0E0E0;
+            --text-color-secondary: #B0B0B0;
+            --border-color: #333333;
+            --code-background: #151515;
+            --code-text: #BBBBBB;
+            --code-comment: #6A9955;
+            --code-keyword: #4B89C1;
+            --code-string: #B57B66;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--surface-color);
+            color: var(--text-color);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-text {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-left: 1rem;
+            color: var(--text-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--bright-blue);
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--medium-blue);
+            margin-top: 2.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--light-blue);
+            margin-top: 2rem;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            color: var(--medium-blue);
+            margin-top: 1.5rem;
+        }
+        
+        .intro {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .platform-card {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .platform-title {
+            color: var(--bright-blue);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .code-block {
+            background-color: var(--code-background);
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            border-left: 4px solid var(--bright-blue);
+            color: var(--code-text);
+        }
+
+        .code-block pre {
+            margin: 0;
+        }
+
+        .code-comment {
+            color: var(--code-comment);
+        }
+
+        .code-keyword {
+            color: var(--code-keyword);
+        }
+
+        .code-string {
+            color: var(--code-string);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-card {
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            color: var(--medium-blue);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .note {
+            background-color: rgba(41, 182, 246, 0.1);
+            border-left: 4px solid var(--bright-blue);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .warning {
+            background-color: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid #FF9800;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .tip {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--bright-blue);
+        }
+        
+        .stat-label {
+            color: var(--text-color-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .nav-links {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--bright-blue);
+            text-decoration: none;
+        }
+
+        .footer {
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .toc {
+            background-color: var(--surface-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .toc-title {
+            font-size: 1.3rem;
+            color: var(--bright-blue);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .toc-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc-list li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-list a {
+            color: var(--medium-blue);
+            text-decoration: none;
+        }
+
+        .toc-list a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .code-block {
+                font-size: 0.8rem;
+            }
+
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="logo-container">
+        <img src="assets/logo.png" alt="PerchEye Logo" width="40" height="40" />
+        <span class="logo-text">PerchEye SDK</span>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="https://onix-systems.github.io/PerchEye-SDK-Multiplatform/how-to-use">How to Use</a>
+        <a href="https://onix-systems.github.io/PerchEye-SDK-Multiplatform/advantages.html">Advantages</a>
+        <a href="">Documentation</a>
+        <a href="https://github.com/Onix-Systems/PerchEye-SDK-Multiplatform">Download</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="intro">
+        <h1>PerchEye Multiplatform SDK</h1>
+        <p>PerchEye SDK provides advanced facial recognition functionality for mobile applications across multiple platforms, enabling face detection, enrollment, verification, and comparison using embedded TensorFlow Lite models.</p>
+    </div>
+
+    <div class="toc">
+        <h3 class="toc-title">Table of Contents</h3>
+        <ul class="toc-list">
+            <li><a href="#platforms">🚀 Supported Platforms</a></li>
+            <li><a href="#quick-start">🔧 Quick Start Examples</a></li>
+            <li><a href="#features">🎯 Core Features</a></li>
+            <li><a href="#security">🔐 Security & Privacy</a></li>
+            <li><a href="#demo">📱 Demo Applications</a></li>
+            <li><a href="#setup">🛠 Development Setup</a></li>
+            <li><a href="#performance">📊 Performance Characteristics</a></li>
+            <li><a href="#integration">🔧 Integration Guides</a></li>
+            <li><a href="#support">📞 Support & Resources</a></li>
+        </ul>
+    </div>
+
+    <h2 id="platforms">🚀 Supported Platforms</h2>
+    <div class="platform-grid">
+        <div class="platform-card">
+            <div class="platform-title">Android SDK</div>
+            <p><strong>Location:</strong> <code>/android-aar/</code></p>
+            <p><strong>Language:</strong> Kotlin/Java</p>
+            <p><strong>Integration:</strong> Gradle dependency</p>
+            <p><strong>Documentation:</strong> Native Android implementation</p>
+        </div>
+        
+        <div class="platform-card">
+            <div class="platform-title">iOS SDK</div>
+            <p><strong>Location:</strong> <code>/ios/</code></p>
+            <p><strong>Language:</strong> Swift/Objective-C</p>
+            <p><strong>Integration:</strong> CocoaPods/Swift Package Manager</p>
+            <p><strong>Documentation:</strong> Native iOS implementation</p>
+        </div>
+        
+        <div class="platform-card">
+            <div class="platform-title">Flutter Plugin</div>
+            <p><strong>Location:</strong> <code>/flutter/</code></p>
+            <p><strong>Language:</strong> Dart</p>
+            <p><strong>Integration:</strong> pub.dev dependency</p>
+            <p><strong>Documentation:</strong> Cross-platform Flutter plugin</p>
+        </div>
+        
+        <div class="platform-card">
+            <div class="platform-title">React Native Module</div>
+            <p><strong>Location:</strong> <code>/react-native/</code></p>
+            <p><strong>Language:</strong> JavaScript/TypeScript</p>
+            <p><strong>Integration:</strong> npm package</p>
+            <p><strong>Documentation:</strong> Cross-platform React Native module</p>
+        </div>
+    </div>
+
+    <h2 id="quick-start">🔧 Quick Start Examples</h2>
+
+    <h3>Android (Kotlin)</h3>
+    <div class="code-block">
+        <pre><span class="code-keyword">val</span> perchEye = PerchEye(context)
+perchEye.init()
+perchEye.openTransaction()
+
+<span class="code-keyword">val</span> result = perchEye.addImage(bitmap)
+<span class="code-keyword">if</span> (result == ImageResult.SUCCESS) {
+    <span class="code-keyword">val</span> hash = perchEye.enroll()
+    <span class="code-keyword">val</span> similarity = perchEye.verify(hash)
+}
+
+perchEye.destroy()</pre>
+    </div>
+
+    <h3>iOS (Swift)</h3>
+    <div class="code-block">
+        <pre><span class="code-keyword">let</span> perchEye = PerchEyeSwift()
+perchEye.openTransaction()
+
+<span class="code-keyword">let</span> result = perchEye.load(image: uiImage)
+<span class="code-keyword">if</span> result == .success {
+    <span class="code-keyword">let</span> hash = perchEye.enroll()
+    <span class="code-keyword">let</span> similarity = perchEye.verify(hash: hash)
+}
+
+perchEye.destroy()</pre>
+    </div>
+
+    <h3>Flutter (Dart)</h3>
+    <div class="code-block">
+        <pre><span class="code-keyword">await</span> PerchEye.init();
+<span class="code-keyword">await</span> PerchEye.openTransaction();
+
+<span class="code-keyword">final</span> result = <span class="code-keyword">await</span> PerchEye.addImage(base64Image);
+<span class="code-keyword">if</span> (result == 'SUCCESS') {
+    <span class="code-keyword">final</span> hash = <span class="code-keyword">await</span> PerchEye.enroll();
+    <span class="code-keyword">final</span> similarity = <span class="code-keyword">await</span> PerchEye.verify(hash);
+}
+
+<span class="code-keyword">await</span> PerchEye.destroy();</pre>
+    </div>
+
+    <h3>React Native (JavaScript)</h3>
+    <div class="code-block">
+        <pre><span class="code-keyword">import</span> { openTransaction, addImage, enroll, verify } <span class="code-keyword">from</span> <span class="code-string">'react-native-perch-eye'</span>;
+
+<span class="code-keyword">await</span> openTransaction();
+<span class="code-keyword">const</span> result = <span class="code-keyword">await</span> addImage(base64Image);
+<span class="code-keyword">if</span> (result === <span class="code-string">'SUCCESS'</span>) {
+    <span class="code-keyword">const</span> hash = <span class="code-keyword">await</span> enroll();
+    <span class="code-keyword">const</span> similarity = <span class="code-keyword">await</span> verify(hash);
+}</pre>
+    </div>
+
+    <h2 id="features">🎯 Core Features</h2>
+
+    <h3>Universal Functionality</h3>
+    <p>All platform implementations provide:</p>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <div class="feature-title">Face Detection</div>
+            <p>Identify human faces in images</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📝</div>
+            <div class="feature-title">Face Enrollment</div>
+            <p>Generate unique biometric hashes</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">✅</div>
+            <div class="feature-title">Face Verification</div>
+            <p>Compare faces against stored hashes</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <div class="feature-title">Batch Processing</div>
+            <p>Handle multiple images efficiently</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <div class="feature-title">Offline Operation</div>
+            <p>No internet connection required</p>
+        </div>
+    </div>
+
+    <h3>ImageResult Status Codes</h3>
+    <p>All platforms return consistent status codes:</p>
+    
+    <div class="code-block">
+        <pre><span class="code-comment">// Status codes</span>
+SUCCESS              <span class="code-comment">// Operation completed successfully</span>
+FACE_NOT_FOUND       <span class="code-comment">// No face detected in the image</span>
+FILE_NOT_FOUND       <span class="code-comment">// Image file not found (Android only)</span>
+TRANSACTION_NOT_OPEN <span class="code-comment">// No active transaction</span>
+SDK_NOT_INITIALIZED  <span class="code-comment">// SDK not properly initialized</span>
+INTERNAL_ERROR       <span class="code-comment">// Internal processing error</span></pre>
+    </div>
+
+    <h2 id="security">🔐 Security & Privacy</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🔒</div>
+            <div class="feature-title">Offline Processing</div>
+            <p>All computation happens on-device</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🚫</div>
+            <div class="feature-title">No Data Transmission</div>
+            <p>Biometric data never leaves the device</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">#️⃣</div>
+            <div class="feature-title">Hash-Based Storage</div>
+            <p>Only mathematical representations are stored</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <div class="feature-title">Privacy Compliant</div>
+            <p>Meets GDPR and privacy regulations</p>
+        </div>
+    </div>
+
+    <h2 id="demo">📱 Demo Applications</h2>
+    <p>Each platform includes a fully functional demo application:</p>
+
+    <div class="platform-grid">
+        <div class="platform-card">
+            <div class="platform-title">Android Demo</div>
+            <p><strong>Location:</strong> <code>android-demo/</code></p>
+            <p>Native Android app</p>
+        </div>
+        
+        <div class="platform-card">
+            <div class="platform-title">iOS Demo</div>
+            <p><strong>Location:</strong> <code>ios-demo/</code></p>
+            <p>Native iOS app</p>
+        </div>
+        
+        <div class="platform-card">
+            <div class="platform-title">Flutter Demo</div>
+            <p><strong>Location:</strong> <code>flutter-demo/</code></p>
+            <p>Cross-platform Flutter app</p>
+        </div>
+        
+        <div class="platform-card">
+            <div class="platform-title">React Native Demo</div>
+            <p><strong>Location:</strong> <code>react-native-demo/</code></p>
+            <p>Cross-platform RN app</p>
+        </div>
+    </div>
+
+    <h2 id="setup">🛠 Development Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-title">Android</div>
+            <p>Android Studio, Gradle, API level 24+</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-title">iOS</div>
+            <p>Xcode 12+, iOS 14.0+, Swift 5.0+</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-title">Flutter</div>
+            <p>Flutter SDK 3.0+, Dart 2.17+</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-title">React Native</div>
+            <p>Node.js 18+, React Native 0.70+</p>
+        </div>
+    </div>
+
+    <h3>Building from Source</h3>
+    <div class="code-block">
+        <pre><span class="code-comment"># Clone the repository</span>
+git clone https://github.com/Onix-Systems/PerchEye-SDK-Multiplatform.git
+
+<span class="code-comment"># Build Android SDK</span>
+cd android && ./gradlew build
+
+<span class="code-comment"># Build iOS SDK</span>  
+cd ios && xcodebuild -project PerchEyeFramework.xcodeproj
+
+<span class="code-comment"># Build Flutter plugin</span>
+cd flutter && flutter packages get
+
+<span class="code-comment"># Build React Native module</span>
+cd react-native && npm install</pre>
+    </div>
+
+    <h2 id="performance">📊 Performance Characteristics</h2>
+
+    <h3>Processing Speed</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">~50-100ms</div>
+            <div class="stat-label">Face Detection</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">~100-200ms</div>
+            <div class="stat-label">Hash Generation</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">~10-50ms</div>
+            <div class="stat-label">Verification</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Multi-threading</div>
+            <div class="stat-label">Supported</div>
+        </div>
+    </div>
+
+    <h3>Memory Usage</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">~50-100MB</div>
+            <div class="stat-label">Runtime Memory</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">~10-20MB</div>
+            <div class="stat-label">Model Size</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">~2-5KB</div>
+            <div class="stat-label">Hash Size</div>
+        </div>
+    </div>
+
+    <h3>Accuracy Metrics</h3>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">>95%</div>
+            <div class="stat-label">Detection Rate</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value"><0.1%</div>
+            <div class="stat-label">False Accept Rate</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value"><5%</div>
+            <div class="stat-label">False Reject Rate</div>
+        </div>
+    </div>
+
+    <h2 id="integration">🔧 Integration Guides</h2>
+
+    <h3>Platform-Specific Setup</h3>
+
+    <h4>Android</h4>
+    <div class="code-block">
+        <pre>dependencies {
+    implementation(files(<span class="code-string">"libs/perch-eye-1.0.3-4.aar"</span>))
+}</pre>
+    </div>
+
+    <h4>iOS</h4>
+    <div class="note">
+        <p><strong>Setup Instructions:</strong></p>
+        <ol>
+            <li>Download PerchEye Framework from the official source</li>
+            <li>Drag PerchEyeFramework.xcframework into your Xcode project</li>
+            <li>Ensure the framework is added to Frameworks, Libraries, and Embedded Content</li>
+            <li>Set Embed & Sign for the framework</li>
+        </ol>
+    </div>
+
+    <h4>Flutter</h4>
+    <div class="code-block">
+        <pre><span class="code-comment"># Run this in your Flutter project:</span>
+
+flutter pub add perch_eye</pre>
+    </div>
+
+    <h4>React Native</h4>
+    <div class="code-block">
+        <pre>npm install react-native-perch-eye</pre>
+    </div>
+
+    <h2 id="support">📞 Support & Resources</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🐛</div>
+            <div class="feature-title">GitHub Issues</div>
+            <p><a href="https://github.com/Onix-Systems/PerchEye-SDK-Multiplatform/issues" style="color: var(--medium-blue);">Report bugs and feature requests</a></p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <div class="feature-title">Documentation</div>
+            <p>Platform-specific guides</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🎮</div>
+            <div class="feature-title">Demo Apps</div>
+            <p>Working examples for each platform</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <div class="feature-title">Community</div>
+            <p>Developer community and discussions</p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <strong>Web Documentation:</strong> Visit our comprehensive web documentation at 
+        <a href="https://onix-systems.github.io/PerchEye-SDK-Multiplatform" style="color: var(--medium-blue);">
+            https://onix-systems.github.io/PerchEye-SDK-Multiplatform
+        </a>
+    </div>
+
+    <div class="note">
+        <strong>License:</strong> This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
+    </div>
+
+    <div class="warning">
+        <strong>Note:</strong> Each platform maintains its own specific documentation and examples. Refer to the individual platform folders for detailed implementation guides and platform-specific features.
+    </div>
+</div>
+
+<div class="footer">
+    <p>&copy; 2025 PerchEye SDK. All rights reserved.</p>
+</div>
+</body>
+</html>
