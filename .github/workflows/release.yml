@@ -35,7 +35,7 @@ jobs:
             # Android SDK Release
             
             **What's included:**
-            - `perch-eye-*.aar` - Android library (ready to use)
+            - `perch-eye-1.0.3-4.aar` - Android library (ready to use)
             
             **How to use:**
             1. Download the `.aar` file
@@ -43,7 +43,7 @@ jobs:
             3. Add to `build.gradle`:
                ```gradle
                dependencies {
-                   implementation(files("libs/perch-eye-X.Y.Z.aar"))
+                   implementation(files("libs/perch-eye-1.0.3-4.aar"))
                }
                ```
           files: |
